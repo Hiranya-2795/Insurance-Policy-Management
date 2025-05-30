@@ -10,15 +10,16 @@ Customer Features:
 - Login with token-based authentication (JWT)
 - Search policies by:
   - Policy ID
-  - Customer ID
-  - Customer Name
-  - Month (to list all policies created in a specific month)
+  - Policy Type
+  - Premium Frequency
 - View policy details
 - Edit personal details (phone, email, address)
 
 Admin Features:
 - Login with admin credentials
 - Add new policy
+- Edit the existing Policies
+- View Statistics
 
 Analytics:
 - A dashboard view of the number of policies sold based on the type of policy and premium frequency via bar graph
