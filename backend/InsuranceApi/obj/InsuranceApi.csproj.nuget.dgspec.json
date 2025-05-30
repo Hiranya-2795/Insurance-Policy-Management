@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\91915\\source\\repos\\Backend\\InsuranceApi\\InsuranceApi\\InsuranceApi.csproj": {}
+    "C:\\Users\\91915\\Insurance-Policy-Management\\backend\\InsuranceApi\\InsuranceApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\91915\\source\\repos\\Backend\\InsuranceApi\\InsuranceApi\\InsuranceApi.csproj": {
+    "C:\\Users\\91915\\Insurance-Policy-Management\\backend\\InsuranceApi\\InsuranceApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\91915\\source\\repos\\Backend\\InsuranceApi\\InsuranceApi\\InsuranceApi.csproj",
+        "projectUniqueName": "C:\\Users\\91915\\Insurance-Policy-Management\\backend\\InsuranceApi\\InsuranceApi.csproj",
         "projectName": "InsuranceApi",
-        "projectPath": "C:\\Users\\91915\\source\\repos\\Backend\\InsuranceApi\\InsuranceApi\\InsuranceApi.csproj",
+        "projectPath": "C:\\Users\\91915\\Insurance-Policy-Management\\backend\\InsuranceApi\\InsuranceApi.csproj",
         "packagesPath": "C:\\Users\\91915\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\91915\\source\\repos\\Backend\\InsuranceApi\\InsuranceApi\\obj\\",
+        "outputPath": "C:\\Users\\91915\\Insurance-Policy-Management\\backend\\InsuranceApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

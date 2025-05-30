@@ -802,8 +802,7 @@
           "fullName",
           "gender",
           "password",
-          "phoneNumber",
-          "role"
+          "phoneNumber"
         ],
         "type": "object",
         "properties": {
@@ -842,8 +841,8 @@
             "type": "string"
           },
           "role": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -1,8 +1,8 @@
-// src/app/pages/view-policy/view-policy.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { PolicyService, Policy } from '../../services/policy.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
@@ -14,13 +14,18 @@ import { PolicyService, Policy } from '../../services/policy.service';
 export class ViewPolicyComponent implements OnInit {
   policy: Policy | null = null;
   loading = true;
+  userRole: 'ADMIN' | 'CUSTOMER' | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private policyService: PolicyService
+    private policyService: PolicyService,
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.userRole = this.authService.getRole();
+
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
@@ -37,6 +42,16 @@ export class ViewPolicyComponent implements OnInit {
     } else {
       console.warn('No policy ID found in route.');
       this.loading = false;
+    }
+  }
+
+  goBack(): void {
+    if (this.userRole === 'ADMIN') {
+      this.router.navigate(['/admin-dashboard']);
+    } else if (this.userRole === 'CUSTOMER') {
+      this.router.navigate(['/customer-dashboard']);
+    } else {
+      this.router.navigate(['/']); // fallback
     }
   }
 }

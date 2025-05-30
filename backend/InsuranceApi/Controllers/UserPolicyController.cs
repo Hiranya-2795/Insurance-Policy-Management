@@ -45,20 +45,21 @@ namespace InsuranceApi.Controllers
             return userPolicies;
         }
 
-        // POST: api/UserPolicy
+        // POST: api/UserPolicy (Only needs userID, policyID, and beneficiaryName)
         [HttpPost]
         public async Task<ActionResult<UserPolicy>> PostUserPolicy(UserPolicy userPolicy)
         {
             if (userPolicy == null)
                 return BadRequest("UserPolicy data is required.");
 
-            var userExists = await _context.UserProfiles.AnyAsync(u => u.UserID == userPolicy.UserID);
-            var policyExists = await _context.Policies.AnyAsync(p => p.PolicyID == userPolicy.PolicyID);
+            // Fetch related entities
+            var user = await _context.UserProfiles.FindAsync(userPolicy.UserID);
+            var policy = await _context.Policies.FindAsync(userPolicy.PolicyID);
 
-            if (!userExists)
+            if (user == null)
                 return BadRequest($"User with ID {userPolicy.UserID} does not exist.");
 
-            if (!policyExists)
+            if (policy == null)
                 return BadRequest($"Policy with ID {userPolicy.PolicyID} does not exist.");
 
             var exists = await _context.UserPolicies
@@ -66,6 +67,10 @@ namespace InsuranceApi.Controllers
 
             if (exists)
                 return BadRequest("UserPolicy entry already exists.");
+
+            // Assign related data
+            userPolicy.User = user;
+            userPolicy.Policy = policy;
 
             _context.UserPolicies.Add(userPolicy);
 
@@ -78,7 +83,7 @@ namespace InsuranceApi.Controllers
                 return StatusCode(500, $"Internal server error: {ex.InnerException?.Message ?? ex.Message}");
             }
 
-            return Created("", userPolicy);
+            return CreatedAtAction(nameof(GetPoliciesForUser), new { userId = userPolicy.UserID }, userPolicy);
         }
 
         // DELETE: api/UserPolicy/{userId}/{policyId}
@@ -115,6 +120,7 @@ namespace InsuranceApi.Controllers
         {
             var query = _context.UserPolicies
                 .Include(up => up.Policy)
+                .Include(up => up.User)
                 .Where(up => up.UserID == userId)
                 .AsQueryable();
 

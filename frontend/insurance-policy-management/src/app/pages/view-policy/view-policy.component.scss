@@ -1,3 +1,10 @@
+$primary-color: #001f3f; // Navy Blue
+$light-primary: #0056b3;
+$background-color: #f8f9fa;
+$card-radius: 1rem;
+$input-border-color: #ccc;
+$input-focus-color: $primary-color;
+
 .dashboard-wrapper {
   background-color: #f8f9fa;
   min-height: 100vh;
@@ -35,7 +42,8 @@
       transition: color 0.3s ease;
 
       &:hover {
-        color: #0056b3;
+        background: #fff;
+        color: $primary-color;
       }
     }
 

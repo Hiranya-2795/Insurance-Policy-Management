@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace InsuranceApi.Controllers
 {
@@ -28,7 +29,7 @@ namespace InsuranceApi.Controllers
             _configuration = configuration;
         }
 
-        // Register a new user
+        // Register a new user or admin
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<ActionResult> Register([FromBody] RegisterRequest registerRequest)
@@ -39,6 +40,15 @@ namespace InsuranceApi.Controllers
             if (await _context.UserProfiles.AnyAsync(u => u.Email == registerRequest.Email))
                 return BadRequest("User with this email already exists.");
 
+            // Define allowed roles
+            var allowedRoles = new[] { "User", "Admin" };
+
+            // Set role to "User" if none provided
+            var role = string.IsNullOrWhiteSpace(registerRequest.Role) ? "User" : registerRequest.Role;
+
+            if (!allowedRoles.Contains(role, StringComparer.OrdinalIgnoreCase))
+                return BadRequest("Invalid role. Allowed roles: User, Admin.");
+
             var user = new UserProfile
             {
                 FullName = registerRequest.FullName,
@@ -48,15 +58,14 @@ namespace InsuranceApi.Controllers
                 Email = registerRequest.Email,
                 AadharNumber = registerRequest.AadharNumber,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerRequest.Password),
-                Role = "User" // default role
+                Role = role
             };
 
             _context.UserProfiles.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "User registered successfully." });
+            return Ok(new { message = $"User registered successfully as {role}." });
         }
-
 
         // Login existing user
         [AllowAnonymous]
@@ -133,8 +142,7 @@ namespace InsuranceApi.Controllers
         [Required, MinLength(6)]
         public string Password { get; set; }
 
-        [Required]
-        public string Role { get; set; } // Admin/User
+        public string Role { get; set; } // Optional: defaults to User
     }
 
     public class LoginRequest

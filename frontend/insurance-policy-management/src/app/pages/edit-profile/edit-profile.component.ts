@@ -120,6 +120,15 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  goBack(): void {
+    this.router.navigate(['/customer-dashboard']);
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
+
   private showMessage(msg: string, type: 'success' | 'error') {
     this.message = msg;
     this.messageType = type;

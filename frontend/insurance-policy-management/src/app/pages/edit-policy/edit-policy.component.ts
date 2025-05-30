@@ -87,7 +87,6 @@ export class EditPolicyComponent implements OnInit {
     this.policyService.updatePolicy(this.policy.policyID, this.policy).subscribe({
       next: () => {
         this.showMessage('Policy successfully updated!', 'success');
-        // Wait 2 seconds to show success message then navigate
         setTimeout(() => {
           this.message = null;
           this.messageType = null;
@@ -99,5 +98,9 @@ export class EditPolicyComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/admin-dashboard']);
   }
 }

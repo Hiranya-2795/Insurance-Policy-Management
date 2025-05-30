@@ -72,4 +72,8 @@ export class AddPolicyComponent {
     this.message = '';
     this.messageType = '';
   }
+
+  goBack() {
+    this.router.navigate(['/admin-dashboard']);
+  }
 }

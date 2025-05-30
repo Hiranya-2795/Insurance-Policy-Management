@@ -2,7 +2,8 @@
   <nav class="navbar">
     <div class="container">
       <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
-      <div class="nav-links">
+      <div class="nav-links d-flex">
+        <button class="logout-btn me-2" (click)="goBack()">Back</button>
         <button class="logout-btn" routerLink="/">Logout</button>
       </div>
     </div>

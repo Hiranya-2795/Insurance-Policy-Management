@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, ChartType, TooltipItem } from 'chart.js';
+import { Router } from '@angular/router';
 
-Chart.register(...registerables); // Required for Chart.js v3+
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-statistics',
@@ -18,10 +19,19 @@ export class StatisticsComponent implements OnInit {
   policyTypeChart: Chart | undefined;
   premiumFrequencyChart: Chart | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchStatistics();
+  }
+
+  logout(): void {
+    // Optional: Add session cleanup logic here
+    this.router.navigate(['/']);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/admin-dashboard']);
   }
 
   fetchStatistics(): void {
@@ -32,7 +42,6 @@ export class StatisticsComponent implements OnInit {
           this.totalPolicies = data.totalPolicies;
           this.activePolicies = data.activeUserPolicies;
 
-          // Transform arrays to object maps for easier charting
           const policyDist = this.transformArrayToMap(data.policyTypeDistribution, 'policyType');
           const freqDist = this.transformArrayToMap(data.premiumFrequencyDistribution, 'premiumFrequency');
 
@@ -60,7 +69,7 @@ export class StatisticsComponent implements OnInit {
     const data = Object.values(distribution);
 
     this.policyTypeChart = new Chart('policyTypeChart', {
-      type: 'bar',
+      type: 'bar' as ChartType,
       data: {
         labels,
         datasets: [{
@@ -70,7 +79,6 @@ export class StatisticsComponent implements OnInit {
           borderRadius: 0,
           barPercentage: 0.7,
           categoryPercentage: 0.6
-
         }]
       },
       options: {
@@ -86,7 +94,7 @@ export class StatisticsComponent implements OnInit {
             cornerRadius: 6,
             padding: 10,
             callbacks: {
-              label: (context) => `${context.parsed.y} policies`
+              label: (context: TooltipItem<'bar'>) => `${context.parsed.y} policies`
             }
           }
         },
@@ -129,7 +137,7 @@ export class StatisticsComponent implements OnInit {
     const data = Object.values(distribution);
 
     this.premiumFrequencyChart = new Chart('premiumFrequencyChart', {
-      type: 'bar',
+      type: 'bar' as ChartType,
       data: {
         labels,
         datasets: [{
@@ -139,7 +147,6 @@ export class StatisticsComponent implements OnInit {
           borderRadius: 0,
           barPercentage: 0.5,
           categoryPercentage: 0.6
-
         }]
       },
       options: {
@@ -155,7 +162,7 @@ export class StatisticsComponent implements OnInit {
             cornerRadius: 6,
             padding: 10,
             callbacks: {
-              label: (context) => `${context.parsed.y} entries`
+              label: (context: TooltipItem<'bar'>) => `${context.parsed.y} entries`
             }
           }
         },

@@ -1,8 +1,10 @@
 <div class="dashboard-wrapper bg-light min-vh-100">
   <nav class="navbar shadow-sm">
-    <div class="container">
+    <div class="container d-flex align-items-center justify-content-between">
       <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
-      <div class="nav-links">
+      
+      <div class="nav-links d-flex align-items-center gap-3">
+        <button class="logout-btn me-2" (click)="goBack()">Back</button>        
         <button class="logout-btn" routerLink="/">Logout</button>
       </div>
     </div>
@@ -12,7 +14,7 @@
     <h2 class="fw-bold mb-4 primary-text">View Policy</h2>
     <p class="lead mb-4">Detailed information about your policy</p>
 
-    <!-- 📄 Policy Information -->
+    <!-- Policy Information -->
     <div class="card p-4 shadow-sm mb-5">
       <h5 class="fw-bold mb-3">Policy Information</h5>
       <div class="table-responsive">
@@ -28,7 +30,7 @@
       </div>
     </div>
 
-    <!-- 📑 Coverage Information -->
+    <!-- Coverage Information -->
     <div class="card p-4 shadow-sm mb-5">
       <h5 class="fw-bold mb-3">Coverage Information</h5>
       <div class="table-responsive">
