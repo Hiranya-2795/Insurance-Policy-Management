@@ -81,11 +81,6 @@ $card-radius: 1rem;
     border-radius: 0.5rem;
     border: 1px solid #ccc;
   }
-
-  .buttons {
-    display: flex;
-    gap: 0.5rem;
-  }
 }
 
 .btn {
@@ -146,12 +141,11 @@ $card-radius: 1rem;
   }
 }
 
-
 .pagination {
   .page-item {
     .page-link {
       cursor: pointer;
-      color: #001f3f;
+      color: $primary-color;
       font-weight: 500;
       border-radius: 0.3rem;
       transition: background 0.3s ease;
@@ -162,9 +156,9 @@ $card-radius: 1rem;
     }
 
     &.active .page-link {
-      background-color: #001f3f;
+      background-color: $primary-color;
       color: white;
-      border-color: #001f3f;
+      border-color: $primary-color;
     }
 
     &.disabled .page-link {
@@ -173,7 +167,7 @@ $card-radius: 1rem;
     }
   }
 }
+
 .form-control {
   max-width: 1700px;
 }
-

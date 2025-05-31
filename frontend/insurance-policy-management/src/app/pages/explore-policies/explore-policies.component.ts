@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PolicyService } from '../../services/policy.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-explore-policies',
@@ -18,8 +17,8 @@ export class ExplorePoliciesComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 5;
   searchQuery = '';
-  
-constructor(private policyService: PolicyService, private router: Router) {}
+
+  constructor(private policyService: PolicyService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadPolicies();
@@ -30,6 +29,7 @@ constructor(private policyService: PolicyService, private router: Router) {}
       next: (data) => {
         this.allPolicies = data;
         this.filteredPolicies = data;
+        this.setPage(1); // reset pagination
       },
       error: (err) => console.error('Failed to load policies', err)
     });
@@ -38,10 +38,11 @@ constructor(private policyService: PolicyService, private router: Router) {}
   searchPolicies(): void {
     const query = this.searchQuery.toLowerCase().trim();
     this.filteredPolicies = this.allPolicies.filter(policy =>
-      policy.policyID.toLowerCase().includes(query) ||
-      policy.policyType.toLowerCase().includes(query) ||
-      policy.premiumFrequency.toLowerCase().includes(query)
+      (policy.policyID && policy.policyID.toLowerCase().includes(query)) ||
+      (policy.policyType && policy.policyType.toLowerCase().includes(query)) ||
+      (policy.premiumFrequency && policy.premiumFrequency.toLowerCase().includes(query))
     );
+    this.setPage(1); // reset to first page on search
   }
 
   get totalPages(): number {
