@@ -145,3 +145,29 @@ $card-radius: 1rem;
     border-radius: 0.4rem;
   }
 }
+.pagination {
+  .page-item {
+    .page-link {
+      cursor: pointer;
+      color: #001f3f;
+      font-weight: 500;
+      border-radius: 0.3rem;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background-color: #e9ecef;
+      }
+    }
+
+    &.active .page-link {
+      background-color: #001f3f;
+      color: white;
+      border-color: #001f3f;
+    }
+
+    &.disabled .page-link {
+      pointer-events: none;
+      color: #ccc;
+    }
+  }
+}

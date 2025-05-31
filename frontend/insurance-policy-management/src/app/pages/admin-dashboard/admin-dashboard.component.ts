@@ -12,11 +12,15 @@ import { PolicyService,Policy } from '../../services/policy.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-  searchQuery: string = '';
-  policies: Policy[] = [];
-  filteredPolicies: Policy[] = [];
+  allPolicies: any[] = [];
+  filteredPolicies: any[] = [];
+  policies: any[] = [];
+  currentPage = 1;
+  itemsPerPage = 5;
+  searchQuery = '';
   loading: boolean = false;
   error: string = '';
+
 
   constructor(private policyService: PolicyService) {}
 
@@ -47,5 +51,26 @@ export class AdminDashboardComponent implements OnInit {
       policy.policyType.toLowerCase().includes(query) ||
       policy.premiumFrequency.toLowerCase().includes(query)
     );
+
   }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredPolicies.length / this.itemsPerPage);
+  }
+
+  get paginatedPolicies(): any[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredPolicies.slice(start, start + this.itemsPerPage);
+  }
+
+  setPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
 }

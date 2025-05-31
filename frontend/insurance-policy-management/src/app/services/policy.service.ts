@@ -60,4 +60,11 @@ export class PolicyService {
     if (premiumFrequency) query += `premiumFrequency=${encodeURIComponent(premiumFrequency)}&`;
     return this.http.get<Policy[]>(query.slice(0, -1)); // remove trailing &
   }
+
+   addToCart(policyId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add-to-cart`, { policyId });
+  }
+  removeFromCart(policyId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/remove-from-cart/${policyId}`);
+  }
 }
