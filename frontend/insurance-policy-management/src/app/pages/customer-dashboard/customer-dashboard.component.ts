@@ -13,9 +13,11 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./customer-dashboard.component.scss']
 })
 export class CustomerDashboardComponent implements OnInit {
-  searchQuery: string = '';
-  policies: any[] = [];
   allPolicies: any[] = [];
+  filteredPolicies: any[] = [];
+  currentPage = 1;
+  itemsPerPage = 5;
+  searchQuery = '';
 
   constructor(public userService: UserService, private router: Router) {}
 
@@ -24,8 +26,8 @@ export class CustomerDashboardComponent implements OnInit {
     if (userId) {
       this.userService.getPoliciesByUserId(userId).subscribe({
         next: (data) => {
-          this.policies = data;
           this.allPolicies = data;
+          this.filteredPolicies = data;
         },
         error: (err) => {
           console.error('Failed to load policies:', err);
@@ -35,19 +37,35 @@ export class CustomerDashboardComponent implements OnInit {
   }
 
   searchPolicies(): void {
-    const query = this.searchQuery.trim().toLowerCase();
-
-    if (!query) {
-      this.policies = [...this.allPolicies];
-      return;
-    }
-
-    this.policies = this.allPolicies.filter(policy =>
+    const query = this.searchQuery.toLowerCase().trim();
+    this.filteredPolicies = this.allPolicies.filter(policy =>
       (policy.policyID && policy.policyID.toLowerCase().includes(query)) ||
+      (policy.policyType && policy.policyType.toLowerCase().includes(query)) ||
+      (policy.premiumFrequency && policy.premiumFrequency.toLowerCase().includes(query)) ||
       (policy.policy?.policyType && policy.policy.policyType.toLowerCase().includes(query)) ||
       (policy.policy?.premiumFrequency && policy.policy.premiumFrequency.toLowerCase().includes(query)) ||
       (policy.beneficiaryName && policy.beneficiaryName.toLowerCase().includes(query))
     );
+    this.currentPage = 1; // Reset to first page on search
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredPolicies.length / this.itemsPerPage);
+  }
+
+  get paginatedPolicies(): any[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredPolicies.slice(start, start + this.itemsPerPage);
+  }
+
+  setPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   logout(): void {

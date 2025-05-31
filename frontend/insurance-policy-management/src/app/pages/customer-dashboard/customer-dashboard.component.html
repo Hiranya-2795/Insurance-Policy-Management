@@ -3,9 +3,9 @@
     <div class="container">
       <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
       <div class="nav-links">
-      <button class="logout-btn" routerLink="/explore-policies">Explore Policies</button>
-      <button class="logout-btn" (click)="logout()">Logout</button>
-    </div>
+        <button class="logout-btn" routerLink="/explore-policies">Explore Policies</button>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
     </div>
   </nav>
 
@@ -46,7 +46,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let policy of policies">
+            <tr *ngFor="let policy of paginatedPolicies">
               <td>{{ policy.policyID }}</td>
               <td>{{ policy.policy?.policyType }}</td>
               <td>${{ policy.policy?.coverageAmount }}</td>
@@ -61,11 +61,30 @@
                 </button>
               </td>
             </tr>
-            <tr *ngIf="policies.length === 0">
+            <tr *ngIf="filteredPolicies.length === 0">
               <td colspan="6" class="text-center text-muted">No policies found.</td>
             </tr>
           </tbody>
         </table>
+
+       <!-- Pagination -->
+      <nav class="mt-4 d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="setPage(currentPage - 1)">Prev</a>
+          </li>
+
+          <li class="page-item"
+              *ngFor="let page of pages"
+              [class.active]="page === currentPage">
+            <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
       </div>
     </div>
   </div>

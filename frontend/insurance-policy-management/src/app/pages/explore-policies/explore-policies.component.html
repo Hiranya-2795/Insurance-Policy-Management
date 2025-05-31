@@ -1,8 +1,26 @@
-<div class="container my-5">
-  <h2 class="fw-bold mb-4 primary-text">Explore All Policies</h2>
-
-  <div class="card p-4 shadow-sm">
+<div class="dashboard-wrapper bg-light min-vh-100">
+    <nav class="navbar shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Explore All Policies</a>
+      <div class="nav-links">
+        <button class="logout-btn" (click)="goBack()">Back</button>
+      </div>
+    </div>
+  </nav>
+  <div class="container my-5">
     <h5 class="fw-bold mb-3">Available Policies</h5>
+     <div class="row align-items-center mb-4">
+      <div class="col-md-10 mb-2 mb-md-0">
+              <div class="search-edit d-flex gap-3 flex-wrap">
+                <input
+                  type="text"
+                  class="form-control flex-grow-1"
+                  placeholder="Search by Policy ID, Policy Type, Premium Frequency..."
+                  [(ngModel)]="searchQuery"
+                  (input)="searchPolicies()"
+                />
+      </div>
+    </div>
     <div class="table-responsive">
       <table class="table">
         <thead>
@@ -15,7 +33,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let policy of allPolicies">
+          <tr *ngFor="let policy of paginatedPolicies">
             <td>{{ policy.policyID }}</td>
             <td>{{ policy.policyType }}</td>
             <td>${{ policy.coverageAmount }}</td>
@@ -38,6 +56,24 @@
           </tr>
         </tbody>
       </table>
+      <!-- Pagination -->
+      <nav class="mt-4 d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="setPage(currentPage - 1)">Prev</a>
+          </li>
+
+          <li class="page-item"
+              *ngFor="let page of pages"
+              [class.active]="page === currentPage">
+            <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>
