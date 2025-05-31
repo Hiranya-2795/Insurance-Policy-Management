@@ -1,0 +1,53 @@
+<div class="dashboard-wrapper" *ngIf="!loading">
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <button class="logout-btn me-2" (click)="goBack()">Back</button>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container main-content">
+    <div class="profile-wrapper">
+      <h2 class="page-title">Admin Profile</h2>
+
+      <div class="card profile-card" *ngIf="adminData; else errorBlock">
+        <div class="profile-pic-container">
+          <img
+            *ngIf="previewImage || adminData.profileImageUrl; else defaultAvatar"
+            [src]="previewImage || adminData.profileImageUrl"
+            alt="Admin Profile"
+            class="profile-pic"
+          />
+          <ng-template #defaultAvatar>
+            <div class="default-avatar">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0056b3" width="80" height="80">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+            </div>
+          </ng-template> <br>
+
+        <div class="profile-details">
+          <p><strong>Full Name:</strong> {{ adminData.fullName }}</p>
+          <p><strong>Date of Birth:</strong> {{ adminData.dateOfBirth | date: 'MMMM-dd-yyyy' }}</p>
+          <p><strong>Gender:</strong> {{ adminData.gender }}</p>
+          <p><strong>Email:</strong> {{ adminData.email }}</p>
+          <p><strong>Phone Number:</strong> {{ adminData.phoneNumber }}</p>
+          <p><strong>Aadhar Number:</strong> {{ adminData.aadharNumber }}</p>
+          <p><strong>Role:</strong> {{ adminData.role }}</p>
+          <p><strong>Office Location:</strong> Hyderabad</p>
+          <p><strong>Languages Known:</strong> English, Hindi</p>
+
+          <p><strong>Bio:</strong></p>
+          <p>No bio available.</p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #errorBlock>
+      <p class="error">{{ error }}</p>
+    </ng-template>
+  </div>
+</div>
