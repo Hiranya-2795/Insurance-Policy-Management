@@ -64,7 +64,7 @@ namespace InsuranceApi.Controllers
             _context.UserProfiles.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = $"User registered successfully as {role}." });
+            return Ok(new { message = $"Registered successfully as {role}." });
         }
 
         // Login existing user
