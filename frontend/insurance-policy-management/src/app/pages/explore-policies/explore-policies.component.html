@@ -1,0 +1,43 @@
+<div class="container my-5">
+  <h2 class="fw-bold mb-4 primary-text">Explore All Policies</h2>
+
+  <div class="card p-4 shadow-sm">
+    <h5 class="fw-bold mb-3">Available Policies</h5>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Policy ID</th>
+            <th>Policy Type</th>
+            <th>Coverage Amount</th>
+            <th>Premium Frequency</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let policy of allPolicies">
+            <td>{{ policy.policyID }}</td>
+            <td>{{ policy.policyType }}</td>
+            <td>${{ policy.coverageAmount }}</td>
+            <td>{{ policy.premiumFrequency }}</td>
+            <td>
+              <div class="d-flex gap-2">
+                <button class="btn small-btn outline-primary-btn"
+                        [routerLink]="['/view-policy', policy.policyID]">
+                  View
+                </button>
+                <button class="btn small-btn primary-btn"
+                        (click)="addToCart(policy.policyID)">
+                  Add to Cart
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="allPolicies.length === 0">
+            <td colspan="5" class="text-center text-muted">No policies available.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
