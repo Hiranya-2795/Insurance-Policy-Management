@@ -46,7 +46,7 @@ export class CustomerDashboardComponent implements OnInit {
       (policy.policy?.premiumFrequency && policy.policy.premiumFrequency.toLowerCase().includes(query)) ||
       (policy.beneficiaryName && policy.beneficiaryName.toLowerCase().includes(query))
     );
-    this.currentPage = 1; // Reset to first page on search
+    this.setPage(1); // Reset to first page on search
   }
 
   get totalPages(): number {

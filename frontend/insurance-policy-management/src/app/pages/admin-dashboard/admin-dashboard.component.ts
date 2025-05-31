@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PolicyService,Policy } from '../../services/policy.service';
+import { PolicyService, Policy } from '../../services/policy.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -20,7 +20,6 @@ export class AdminDashboardComponent implements OnInit {
   searchQuery = '';
   loading: boolean = false;
   error: string = '';
-
 
   constructor(private policyService: PolicyService) {}
 
@@ -51,7 +50,7 @@ export class AdminDashboardComponent implements OnInit {
       policy.policyType.toLowerCase().includes(query) ||
       policy.premiumFrequency.toLowerCase().includes(query)
     );
-
+    this.setPage(1); // Reset to first page on new search
   }
 
   get totalPages(): number {
@@ -72,5 +71,4 @@ export class AdminDashboardComponent implements OnInit {
   get pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-
 }

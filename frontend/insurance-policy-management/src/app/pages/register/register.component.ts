@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerData = {
     FullName: '',
     DateOfBirth: '',
@@ -20,13 +20,33 @@ export class RegisterComponent {
     Email: '',
     AadharNumber: '',
     Password: '',
-    Role: 'User'
+    Role: 'User'  // default
   };
+
+  pageTitle = 'Register';
+  buttonText = 'Register';
 
   message: string | null = null;
   messageType: 'success' | 'error' | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    const mode = this.route.snapshot.paramMap.get('mode');
+    if (mode === 'admin') {
+      this.registerData.Role = 'Admin';
+      this.pageTitle = 'Register New Admin';
+      this.buttonText = 'Register New Admin';
+    } else {
+      this.registerData.Role = 'User';
+      this.pageTitle = 'Register';
+      this.buttonText = 'Register';
+    }
+  }
 
   showMessage(msg: string, type: 'success' | 'error' = 'error') {
     this.message = msg;
@@ -45,7 +65,6 @@ export class RegisterComponent {
     this.http.post(apiUrl, this.registerData, { responseType: 'text' }).subscribe({
       next: (response) => {
         this.showMessage('Registered successfully', 'success');
-        // Navigate after showing success message for 2 seconds
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 3000);

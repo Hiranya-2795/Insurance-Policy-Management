@@ -1,10 +1,9 @@
 <div class="dashboard-wrapper">
   <div class="container main-content">
-    <h2 class="page-title">Register</h2>
+    <h2 class="page-title">{{ pageTitle }}</h2>
 
     <div class="card form-card">
 
-      <!-- Message Box -->
       <div
         *ngIf="message"
         [ngClass]="{'message-success': messageType === 'success', 'message-error': messageType === 'error'}"
@@ -138,26 +137,22 @@
           </small>
         </div>
 
-        <!-- Role -->
+        <!-- Role - fixed and readonly -->
         <div class="form-group">
-          <label for="role">Role <span class="required">*</span></label>
-          <select
+          <label for="role">Role</label>
+          <input
+            type="text"
             id="role"
-            name="Role"
-            [(ngModel)]="registerData.Role"
+            [value]="registerData.Role"
             class="form-control"
-            required
-          >
-            <option value="" disabled>Select Role</option>
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-          </select>
+            readonly
+          />
           <small class="form-text text-muted">
-            Choose your role in the system
+            Role is fixed and cannot be changed
           </small>
         </div>
 
-        <button type="submit" class="btn primary-btn mt-3">Register</button>
+        <button type="submit" class="btn primary-btn mt-3">{{ buttonText }}</button>
       </form>
     </div>
   </div>

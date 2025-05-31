@@ -3,6 +3,7 @@
     <div class="container">
       <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
       <div class="nav-links">
+        <button class="logout-btn" routerLink="/register/admin">Register New Admin</button>
         <button class="logout-btn" routerLink="/statistics">Statistics</button>
         <button class="logout-btn" routerLink="/">Logout</button>
       </div>
@@ -64,26 +65,38 @@
             </tr>
           </tbody>
         </table>
-        <!-- Pagination -->
-      <nav class="mt-4 d-flex justify-content-center">
-        <ul class="pagination">
-          <li class="page-item" [class.disabled]="currentPage === 1">
-            <a class="page-link" (click)="setPage(currentPage - 1)">Prev</a>
-          </li>
 
-          <li class="page-item"
-              *ngFor="let page of pages"
-              [class.active]="page === currentPage">
-            <a class="page-link" (click)="setPage(page)">{{ page }}</a>
-          </li>
+        <!-- Pagination and Items Per Page -->
+        <nav class="mt-4 d-flex justify-content-between align-items-center flex-wrap">
+          <ul class="pagination mb-0">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="setPage(currentPage - 1)">Prev</a>
+            </li>
 
-          <li class="page-item" [class.disabled]="currentPage === totalPages">
-            <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
-          </li>
-        </ul>
-      </nav>
-      <!--End of pagination -->
+            <li class="page-item"
+                *ngFor="let page of pages"
+                [class.active]="page === currentPage">
+              <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+            </li>
+
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center mt-3 mt-sm-0 ms-sm-3">
+            <label for="itemsPerPage" class="me-2 fw-bold">Policies per page:</label>
+            <select id="itemsPerPage"
+                    class="form-select w-auto"
+                    [(ngModel)]="itemsPerPage"
+                    (change)="setPage(1)">
+              <option *ngFor="let count of [5, 10, 20, 50]" [value]="count">{{ count }}</option>
+            </select>
+          </div>
+        </nav>
+        <!-- End Pagination -->
       </div>
+
       <div *ngIf="!loading && filteredPolicies.length === 0" class="text-muted text-center">
         No policies found.
       </div>

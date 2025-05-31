@@ -11,7 +11,6 @@ import { EditPolicyComponent } from './pages/edit-policy/edit-policy.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ExplorePoliciesComponent } from './pages/explore-policies/explore-policies.component';
 
-
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -24,5 +23,6 @@ export const routes: Routes = [
   { path: 'add-policy', component: AddPolicyComponent },  
   { path: 'edit-policy/:id', component: EditPolicyComponent }, 
   { path: 'register', component: RegisterComponent }, 
-  {path: 'explore-policies', component: ExplorePoliciesComponent},
+  { path: 'register/:mode', component: RegisterComponent },  // ✅ Support for admin registration
+  { path: 'explore-policies', component: ExplorePoliciesComponent },
 ];
