@@ -76,7 +76,7 @@ export class LoginComponent {
     setTimeout(() => {
       this.message = '';
       this.messageType = '';
-    }, 8000);
+    }, 3000);
   }
 
   navigateToRegister() {
