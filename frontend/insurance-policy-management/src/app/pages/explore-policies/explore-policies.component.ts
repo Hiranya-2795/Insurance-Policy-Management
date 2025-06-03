@@ -19,6 +19,7 @@ export class ExplorePoliciesComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 5;
   searchQuery = '';
+  cartCount = 0;
 
   constructor(
     private policyService: PolicyService,
@@ -27,17 +28,17 @@ export class ExplorePoliciesComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  cartCount = 0;
+  ngOnInit(): void {
+    this.loadPolicies();
 
-ngOnInit(): void {
-  this.loadPolicies();
+    // Initialize cart count from CartService
+    this.cartCount = this.cartService.getCartItems().length;
 
-  // subscribe to cart changes
-  this.cartService.cart$.subscribe(items => {
-    this.cartCount = items.length;
-  });
-}
-
+    // Subscribe to cart changes
+    this.cartService.cart$.subscribe(items => {
+      this.cartCount = items.length;
+    });
+  }
 
   loadPolicies(): void {
     this.policyService.getPolicies().subscribe({
@@ -79,12 +80,12 @@ ngOnInit(): void {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
-  addToCart(policy: any) {
-    const added = this.cartService.addToCart({ ...policy });
+  addToCart(policy: any): void {
+    const added = this.cartService.addToCart(policy);
     if (added) {
       this.toastr.success('Policy added to cart!');
     } else {
-      this.toastr.info('Policy already in cart.');
+      this.toastr.info('This policy is already in the cart.');
     }
   }
 
