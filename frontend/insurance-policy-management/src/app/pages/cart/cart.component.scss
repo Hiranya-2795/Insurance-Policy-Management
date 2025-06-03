@@ -171,3 +171,98 @@ $card-radius: 1rem;
 .form-control {
   max-width: 1700px;
 }
+.beneficiary-modal {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  input {
+    margin: 0.5rem 0;
+    padding: 0.4rem;
+    width: 100%;
+  }
+
+  button {
+    margin-right: 0.5rem;
+  }
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.modal-content h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.modal-content input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0,86,179,0.5);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn.primary-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary-btn:disabled {
+  background-color: #99caff;
+  cursor: not-allowed;
+}
+
+.btn.outline-secondary-btn {
+  background: transparent;
+  border: 1px solid #6c757d;
+  color: #6c757d;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn.outline-secondary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
