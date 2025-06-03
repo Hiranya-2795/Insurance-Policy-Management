@@ -21,6 +21,7 @@
               <th>Policy Type</th>
               <th>Coverage Amount</th>
               <th>Premium Frequency</th>
+              <th>Beneficiaries</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -36,9 +37,11 @@
                   (click)="removeFromCart(policy.policyID)">
                   Remove
                 </button>
+
                 <button
-                  class="btn small-btn primary-btn"
-                  (click)="addPolicy(policy)">
+                  class="btn small-btn primary-btn mt-1"
+                  (click)="openBeneficiaryModal(policy)"
+                  [disabled]="isAddingPolicy">
                   Add Policy
                 </button>
               </td>
@@ -60,5 +63,36 @@
         </button>
       </div>
     </ng-template>
+  </div>
+
+  <!-- Beneficiary Modal Overlay -->
+  <div class="modal-backdrop" *ngIf="showBeneficiaryModal">
+    <div class="modal-content">
+      <h4>Enter Beneficiary Name</h4>
+      <input
+        type="text"
+        [(ngModel)]="beneficiaryName"
+        placeholder="Beneficiary Name"
+        autofocus
+        [disabled]="isAddingPolicy"
+        (keydown.enter)="submitBeneficiary()"
+      />
+      <div class="modal-actions">
+        <button
+          (click)="submitBeneficiary()"
+          [disabled]="isAddingPolicy || !beneficiaryName.trim()"
+          class="btn primary-btn"
+        >
+          {{ isAddingPolicy ? 'Adding...' : 'Add Policy' }}
+        </button>
+        <button
+          (click)="closeBeneficiaryModal()"
+          [disabled]="isAddingPolicy"
+          class="btn outline-secondary-btn"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   </div>
 </div>

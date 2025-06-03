@@ -79,14 +79,21 @@ export class ExplorePoliciesComponent implements OnInit {
   get pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+  
+  isAdding = false;
 
   addToCart(policy: any): void {
+    if (this.isAdding) return;
+    this.isAdding = true;
+
     const added = this.cartService.addToCart(policy);
     if (added) {
       this.toastr.success('Policy added to cart!');
     } else {
       this.toastr.info('This policy is already in the cart.');
     }
+
+    setTimeout(() => this.isAdding = false, 500); // allow again after half second
   }
 
   goBack(): void {
