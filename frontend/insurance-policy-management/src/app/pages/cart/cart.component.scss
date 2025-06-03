@@ -1,4 +1,4 @@
-// customer-dashboard.component.scss
+@use 'sass:color';
 
 $primary-color: #001f3f; // Navy Blue
 $light-primary: #0056b3;
@@ -81,11 +81,6 @@ $card-radius: 1rem;
     border-radius: 0.5rem;
     border: 1px solid #ccc;
   }
-
-  .buttons {
-    display: flex;
-    gap: 0.5rem;
-  }
 }
 
 .btn {
@@ -130,7 +125,7 @@ $card-radius: 1rem;
   }
 
   thead {
-    background-color: lighten($primary-color, 40%);
+    background-color: color.adjust($primary-color, $lightness: 40%);
     color: $primary-color;
   }
 }
@@ -145,11 +140,12 @@ $card-radius: 1rem;
     border-radius: 0.4rem;
   }
 }
+
 .pagination {
   .page-item {
     .page-link {
       cursor: pointer;
-      color: #001f3f;
+      color: $primary-color;
       font-weight: 500;
       border-radius: 0.3rem;
       transition: background 0.3s ease;
@@ -160,9 +156,9 @@ $card-radius: 1rem;
     }
 
     &.active .page-link {
-      background-color: #001f3f;
+      background-color: $primary-color;
       color: white;
-      border-color: #001f3f;
+      border-color: $primary-color;
     }
 
     &.disabled .page-link {
@@ -172,4 +168,6 @@ $card-radius: 1rem;
   }
 }
 
-
+.form-control {
+  max-width: 1700px;
+}
