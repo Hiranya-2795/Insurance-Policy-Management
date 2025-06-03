@@ -1,0 +1,64 @@
+<div class="dashboard-wrapper bg-light min-vh-100">
+  <nav class="navbar shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <button class="logout-btn" (click)="goBack()">Back</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <h2 class="fw-bold mb-4 primary-text">Your Cart</h2>
+    <p class="lead mb-4">Review policies you have added to your cart.</p>
+
+    <div class="card p-4 shadow-sm" *ngIf="cartItems.length > 0; else emptyCart">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Policy ID</th>
+              <th>Policy Type</th>
+              <th>Coverage Amount</th>
+              <th>Premium Frequency</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let policy of cartItems">
+              <td>{{ policy.policyID }}</td>
+              <td>{{ policy.policyType }}</td>
+              <td>${{ policy.coverageAmount }}</td>
+              <td>{{ policy.premiumFrequency }}</td>
+              <td>
+                <button
+                  class="btn small-btn outline-primary-btn me-2"
+                  (click)="removeFromCart(policy.policyID)">
+                  Remove
+                </button>
+                <button
+                  class="btn small-btn primary-btn"
+                  (click)="addPolicy(policy)">
+                  Add Policy
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between align-items-center flex-wrap">
+        <div class="fw-bold fs-5">Total Policies: {{ cartItems.length }}</div>
+      </div>
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="text-center text-muted py-5">
+        <p>Your cart is empty.</p>
+        <button class="btn primary-btn" routerLink="/explore-policies">
+          Browse Policies
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

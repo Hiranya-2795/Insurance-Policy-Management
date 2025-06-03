@@ -6,6 +6,8 @@ import { provideRouter } from '@angular/router';
 import { provideZoneChangeDetection } from '@angular/core';
 import { routes } from './app.routes';
 import { SpinnerInterceptor } from './spinner.interceptor';
+import { provideToastr } from 'ngx-toastr'; // ✅ Import
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +20,10 @@ export const appConfig: ApplicationConfig = {
       HttpClientModule
     ),
 
-    // 👇 Register the SpinnerInterceptor properly
+    // ✅ Toastr notification provider
+    provideToastr(),
+
+    // ✅ Spinner interceptor
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PolicyService } from '../../services/policy.service';
+import { CartService } from '../../services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-explore-policies',
@@ -18,11 +20,24 @@ export class ExplorePoliciesComponent implements OnInit {
   itemsPerPage = 5;
   searchQuery = '';
 
-  constructor(private policyService: PolicyService, private router: Router) {}
+  constructor(
+    private policyService: PolicyService,
+    private router: Router,
+    private cartService: CartService,
+    private toastr: ToastrService
+  ) {}
 
-  ngOnInit(): void {
-    this.loadPolicies();
-  }
+  cartCount = 0;
+
+ngOnInit(): void {
+  this.loadPolicies();
+
+  // subscribe to cart changes
+  this.cartService.cart$.subscribe(items => {
+    this.cartCount = items.length;
+  });
+}
+
 
   loadPolicies(): void {
     this.policyService.getPolicies().subscribe({
@@ -64,11 +79,13 @@ export class ExplorePoliciesComponent implements OnInit {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
-  addToCart(policyId: number): void {
-    this.policyService.addToCart(policyId).subscribe({
-      next: () => alert(`Policy ${policyId} added to cart successfully!`),
-      error: () => alert('Failed to add policy to cart.')
-    });
+  addToCart(policy: any) {
+    const added = this.cartService.addToCart({ ...policy });
+    if (added) {
+      this.toastr.success('Policy added to cart!');
+    } else {
+      this.toastr.info('Policy already in cart.');
+    }
   }
 
   goBack(): void {

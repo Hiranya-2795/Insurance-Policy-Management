@@ -4,6 +4,7 @@
       <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
       <div class="nav-links">
         <button class="logout-btn" (click)="goBack()">Back</button>
+        <button routerLink="/cart" class="logout-btn">🛒 Go to Cart <span *ngIf="cartCount > 0">({{ cartCount }})</span></button>
       </div>
     </div>
   </nav>
@@ -50,15 +51,13 @@
                 <div class="action-buttons">
                   <button
                     class="btn small-btn outline-primary-btn"
-                    [routerLink]="['/view-policy', policy.policyID]"
-                  >
+                    [routerLink]="['/view-policy', policy.policyID]">
                     View Policy
                   </button>
                   <button
                     class="btn small-btn primary-btn"
-                    (click)="addToCart(policy.policyID)"
-                  >
-                    Add Policy
+                    (click)="addToCart(policy)">
+                    Add to Cart
                   </button>
                 </div>
               </td>
@@ -79,8 +78,7 @@
             <li
               class="page-item"
               *ngFor="let page of pages"
-              [class.active]="page === currentPage"
-            >
+              [class.active]="page === currentPage">
               <a class="page-link" (click)="setPage(page)">{{ page }}</a>
             </li>
 
@@ -95,8 +93,7 @@
               id="itemsPerPage"
               class="form-select w-auto"
               [(ngModel)]="itemsPerPage"
-              (change)="setPage(1)"
-            >
+              (change)="setPage(1)">
               <option *ngFor="let count of [5, 10, 20, 50]" [value]="count">
                 {{ count }}
               </option>

@@ -11,6 +11,8 @@ import { EditPolicyComponent } from './pages/edit-policy/edit-policy.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ExplorePoliciesComponent } from './pages/explore-policies/explore-policies.component';
 import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
+import { CartComponent } from './pages/cart/cart.component';
+
 
 
 export const routes: Routes = [
@@ -28,4 +30,6 @@ export const routes: Routes = [
   { path: 'register/:mode', component: RegisterComponent },
   { path: 'explore-policies', component: ExplorePoliciesComponent },
   { path: 'admin-profile', component: AdminProfileComponent },
+  {path: 'cart',
+  loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent)},
 ];
