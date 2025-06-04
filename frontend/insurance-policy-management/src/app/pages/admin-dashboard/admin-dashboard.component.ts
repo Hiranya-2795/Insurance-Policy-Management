@@ -50,7 +50,7 @@ export class AdminDashboardComponent implements OnInit {
       policy.policyType.toLowerCase().includes(query) ||
       policy.premiumFrequency.toLowerCase().includes(query)
     );
-    this.setPage(1); // Reset to first page on new search
+    this.setPage(1);
   }
 
   get totalPages(): number {
