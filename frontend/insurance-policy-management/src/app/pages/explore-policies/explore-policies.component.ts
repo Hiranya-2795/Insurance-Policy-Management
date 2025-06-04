@@ -4,7 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PolicyService } from '../../services/policy.service';
 import { CartService } from '../../services/cart.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, IndividualConfig } from 'ngx-toastr';
 
 @Component({
   selector: 'app-explore-policies',
@@ -19,7 +19,16 @@ export class ExplorePoliciesComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 5;
   searchQuery = '';
-  cartCount = 0;
+  cartCount: number = 0;
+  isAdding = false;
+
+  // ✅ Toast configuration
+  private toastConfig: Partial<IndividualConfig> = {
+    positionClass: 'toast-top-center',
+    timeOut: 2000,
+    closeButton: true,
+    progressBar: true
+  };
 
   constructor(
     private policyService: PolicyService,
@@ -30,13 +39,8 @@ export class ExplorePoliciesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPolicies();
-
-    // Initialize cart count from CartService
-    this.cartCount = this.cartService.getCartItems().length;
-
-    // Subscribe to cart changes
-    this.cartService.cart$.subscribe(items => {
-      this.cartCount = items.length;
+    this.cartService.cartCount$.subscribe(count => {
+      this.cartCount = count;
     });
   }
 
@@ -45,7 +49,7 @@ export class ExplorePoliciesComponent implements OnInit {
       next: (data) => {
         this.allPolicies = data;
         this.filteredPolicies = data;
-        this.setPage(1); // reset pagination
+        this.setPage(1);
       },
       error: (err) => console.error('Failed to load policies', err)
     });
@@ -58,7 +62,7 @@ export class ExplorePoliciesComponent implements OnInit {
       (policy.policyType && policy.policyType.toLowerCase().includes(query)) ||
       (policy.premiumFrequency && policy.premiumFrequency.toLowerCase().includes(query))
     );
-    this.setPage(1); // reset to first page on search
+    this.setPage(1);
   }
 
   get totalPages(): number {
@@ -79,21 +83,21 @@ export class ExplorePoliciesComponent implements OnInit {
   get pages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-  
-  isAdding = false;
 
   addToCart(policy: any): void {
     if (this.isAdding) return;
     this.isAdding = true;
 
-    const added = this.cartService.addToCart(policy);
-    if (added) {
-      this.toastr.success('Policy added to cart!');
+    const alreadyInCart = this.cartService.getCartItems().some((item: any) => item.policyID === policy.policyID);
+
+    if (!alreadyInCart) {
+      this.cartService.addToCart(policy);
+      this.toastr.success('Policy added to cart!', '', this.toastConfig); // ✅ using toastConfig
     } else {
-      this.toastr.info('This policy is already in the cart.');
+      this.toastr.info('This policy is already in the cart.', '', this.toastConfig); // ✅ using toastConfig
     }
 
-    setTimeout(() => this.isAdding = false, 500); // allow again after half second
+    setTimeout(() => this.isAdding = false, 500);
   }
 
   goBack(): void {

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service'; // ✅ Adjust the path if needed
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,6 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
-  // Removed ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
   username: string = '';
@@ -21,7 +21,11 @@ export class LoginComponent {
   message: string = '';
   messageType: 'success' | 'error' | '' = '';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private userService: UserService // ✅ Inject UserService
+  ) {}
 
   login() {
     if (!this.username || !this.password || !this.role) {
@@ -41,10 +45,19 @@ export class LoginComponent {
 
         const decodedToken: any = jwtDecode(res.token);
 
+        // ✅ Extract and store full user info
+        const user = {
+          id: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+          email: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'],
+          username: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+          role: res.role.toUpperCase()
+        };
+
         localStorage.setItem('token', res.token);
-        localStorage.setItem('role', res.role.toUpperCase());
-        localStorage.setItem('userId', decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
-        localStorage.setItem('email', decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']);
+        localStorage.setItem('role', user.role);
+        localStorage.setItem('userId', user.id.toString());
+
+        this.userService.setUser(user); // ✅ Store full user in localStorage
 
         setTimeout(() => {
           if (res.role.toLowerCase() === 'admin') {

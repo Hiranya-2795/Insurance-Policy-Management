@@ -1,5 +1,6 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // <-- ADD THIS
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
 
     importProvidersFrom(
       BrowserModule,
+      BrowserAnimationsModule,  // <-- Add this here
       FormsModule,
       HttpClientModule
     ),
