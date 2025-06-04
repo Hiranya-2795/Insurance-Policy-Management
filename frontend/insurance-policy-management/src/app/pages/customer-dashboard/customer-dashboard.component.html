@@ -1,21 +1,66 @@
 <div class="dashboard-wrapper bg-light min-vh-100">
   <nav class="navbar shadow-sm">
-    <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
       <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
-      <div class="nav-links">
+
+      <div class="nav-links d-flex align-items-center gap-3 position-relative">
+        <!-- User Dropdown -->
+        <div class="user-info-dropdown position-relative" style="user-select: none;">
+          <!-- Icon with hover & click -->
+          <div
+            class="d-flex align-items-center gap-2 cursor-pointer rounded-circle"
+            style="background-color: #001f3f; padding: 4px; box-shadow: 0 0 8px rgba(0,31,63,0.6); width: 40px; height: 40px;"
+            (mouseenter)="onIconMouseEnter()"
+            (mouseleave)="onIconMouseLeave()"
+            (click)="toggleDropdown($event)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="#fff"
+              viewBox="0 0 16 16"
+              class="rounded-circle user-icon"
+              style="display: block; margin: auto;"
+            >
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3z" />
+              <path fill-rule="evenodd" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg>
+          </div>
+
+          <!-- Dropdown content -->
+          <div
+            *ngIf="showDropdown"
+            class="dropdown-card position-absolute bg-white shadow p-3 rounded"
+            style="top: 120%; right: 0; min-width: 260px; z-index: 1000;"
+            (click)="$event.stopPropagation()"
+          >
+            <p><strong>Full Name:  </strong>{{ userFullName }}</p>
+            <p><strong>Email:  </strong>{{ userEmail }}</p>
+            <p><strong>Gender:  </strong>{{ userGender }}</p>
+            <p><strong>Phone:  </strong>{{ userPhone }}</p>
+            <p><strong>Date of Birth:  </strong>{{ userDob }}</p>
+            <div class="d-flex justify-content-between mt-2">
+              <button class="btn btn-sm outline-primary-btn" routerLink="/edit-profile">Edit Profile</button>
+            </div>
+          </div>
+        </div>
+
         <button class="logout-btn" routerLink="/explore-policies">Explore Policies</button>
+
         <button class="logout-btn" (click)="logout()">Logout</button>
+
       </div>
     </div>
   </nav>
 
   <div class="container my-5">
-    <h2 class="fw-bold mb-4 primary-text">Customer Dashboard</h2>
+    <h2 class="fw-bold mb-4 primary-text">{{userFullName}}'s Dashboard</h2>
     <p class="lead mb-4">Welcome back to your Insurance Policy Management Portal.</p>
 
     <!-- Search and Actions Section -->
     <div class="card p-4 shadow-sm mb-5">
-      <h5 class="fw-bold mb-3">Quick Actions</h5>
+      <h5 class="fw-bold mb-3">Search Policies</h5>
       <div class="search-edit d-flex gap-3 flex-wrap">
         <input
           type="text"
@@ -24,9 +69,6 @@
           [(ngModel)]="searchQuery"
           (input)="searchPolicies()"
         />
-        <div class="buttons d-flex gap-2">
-          <button class="btn outline-primary-btn" routerLink="/edit-profile">Edit Profile</button>
-        </div>
       </div>
     </div>
 
@@ -71,19 +113,17 @@
         <nav class="mt-4 d-flex justify-content-between align-items-center flex-wrap">
           <ul class="pagination mb-0">
             <li class="page-item" [class.disabled]="currentPage === 1">
-              <a class="page-link" (click)="setPage(currentPage - 1)">Prev</a>
+              <button class="page-link" (click)="setPage(currentPage - 1)">Previous</button>
             </li>
-
             <li
-              class="page-item"
               *ngFor="let page of pages"
+              class="page-item"
               [class.active]="page === currentPage"
             >
-              <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+              <button class="page-link" (click)="setPage(page)">{{ page }}</button>
             </li>
-
             <li class="page-item" [class.disabled]="currentPage === totalPages">
-              <a class="page-link" (click)="setPage(currentPage + 1)">Next</a>
+              <button class="page-link" (click)="setPage(currentPage + 1)">Next</button>
             </li>
           </ul>
 
@@ -93,15 +133,13 @@
               id="itemsPerPage"
               class="form-select w-auto"
               [(ngModel)]="itemsPerPage"
-              (change)="setPage(1)"
-            >
+              (change)="setPage(1)">
               <option *ngFor="let count of [5, 10, 20, 50]" [value]="count">
                 {{ count }}
               </option>
             </select>
           </div>
         </nav>
-        <!-- End Pagination -->
       </div>
     </div>
   </div>

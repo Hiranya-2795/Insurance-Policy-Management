@@ -171,3 +171,32 @@ $card-radius: 1rem;
     }
   }
 }
+
+/* Icon Button Styling */
+.icon-button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: $primary-color;
+  box-shadow: 0 0 8px rgba(0, 31, 63, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px #fff;
+
+    svg {
+      transform: scale(1.1);
+    }
+  }
+}
