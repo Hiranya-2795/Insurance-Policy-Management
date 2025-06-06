@@ -1,0 +1,139 @@
+// src/app/home/how-it-works/how-it-works.component.scss
+
+// Define colors directly in this component's SCSS if not using global variables.
+// If you ARE using global styles.css with var(--...) then ensure these are defined there.
+$color-primary-navy: #001f3f;
+$color-dark-navy: #00152b;
+$color-accent-blue: #64b5f6; // Lighter blue for icon circle background
+$color-white: #ffffff;
+$color-light-gray-bg: #f9fafb;
+$color-dark-gray: #1f2937;
+$color-medium-gray: #4b5563;
+
+
+.how-it-works-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: $color-light-gray-bg; // Using SCSS variable for light gray background
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.how-it-works-section .section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: $color-dark-gray; // Using SCSS variable for dark gray text
+    margin-bottom: 1.5rem;
+}
+
+.how-it-works-section .section-description {
+    font-size: 1.125rem;
+    color: $color-medium-gray; // Using SCSS variable for medium gray text
+    max-width: 48rem;
+    margin: 0 auto 3rem auto; // Centers the description and provides bottom margin
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step-card {
+  background-color: $color-white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 300ms ease;
+  position: relative;
+  text-align: left;
+}
+
+.step-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-0.5rem);
+}
+
+.step-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: $color-primary-navy;
+  color: $color-white;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.step-icon-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center; /* CHANGED: Centers the icon circle within the card */
+}
+
+.icon-circle-bg {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%; /* Maintains perfect circle */
+  background-color: $color-accent-blue; /* CHANGED: Lighter blue background for highlighting */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the SVG within the circle */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.step-icon {
+  width: 3rem;
+  height: 3rem;
+  color: $color-white; /* CHANGED: Makes the SVG outline WHITE */
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $color-dark-gray;
+  margin-bottom: 1rem;
+}
+
+.step-description {
+  color: $color-medium-gray;
+}
+
+.btn-cta {
+  margin-top: 4rem;
+  padding: 0.75rem 2.5rem;
+  background-color: $color-primary-navy;
+  color: $color-white;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-cta:hover {
+  background-color: $color-dark-navy;
+  transform: translateY(-2px);
+}

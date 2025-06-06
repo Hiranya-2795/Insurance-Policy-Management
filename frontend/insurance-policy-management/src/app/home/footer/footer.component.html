@@ -1,0 +1,73 @@
+<!-- src/app/home/footer/footer.component.html -->
+
+<footer class="footer-section">
+    <div class="footer-container container">
+        <!-- Brand / About Section -->
+        <div class="footer-column footer-brand">
+            <div class="footer-logo">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="footer-logo-icon"
+                >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                    <path d="m9 12 2 2 4-4" />
+                </svg>
+                <span class="footer-logo-text">InsurePro</span>
+            </div>
+            <p class="brand-tagline">Your trusted partner in securing tomorrow, today. Comprehensive insurance coverage designed for modern professionals.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon" [innerHTML]="linkedinIcon"></a>
+                <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon" [innerHTML]="twitterIcon"></a>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon" [innerHTML]="facebookIcon"></a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon" [innerHTML]="instagramIcon"></a>
+            </div>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-column footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <!-- CHANGED: Use href="#id" for on-page scrolling -->
+                <li><a href="#about" class="scroll-link">About Us</a></li>
+                <li><a href="#insurance-policies-section" class="scroll-link">Our Policies</a></li> <!-- Link to Insurance Policies section -->
+                <li><a href="#process" class="scroll-link">How It Works</a></li> <!-- Link to How It Works section -->
+                <li><a routerLink="/insights">Insights</a></li> <!-- Assuming Insights is a separate page -->
+                <li><a routerLink="/explore-policies">Explore Policies</a></li> <!-- Assuming Explore Policies is a separate page -->
+            </ul>
+        </div>
+
+        <!-- Support / Contact Section -->
+        <div class="footer-column footer-contact">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:info@insurepro.com">info&#64;insurepro.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+            <p>Address: 123 Insurance Ave, Suite 456, City, Country</p>
+            <a routerLink="/contact" class="btn-footer-contact">Get In Touch</a> <!-- Assuming Contact is a separate page -->
+        </div>
+
+        <!-- Legal & Portal Section -->
+        <div class="footer-column footer-legal">
+            <h3>Legal & Portal</h3>
+            <ul>
+                <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+                <li><a routerLink="/terms-of-service">Terms of Service</a></li>
+                <li><a routerLink="/login">Client Login</a></li>
+                <li><a routerLink="/register">Register</a></li>
+                <li><a routerLink="/admin-dashboard">Admin Portal</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom Bar for Copyright -->
+    <div class="footer-bottom-bar">
+        <p>&copy; {{ currentYear }} InsurePro. All rights reserved.</p>
+    </div>
+</footer>

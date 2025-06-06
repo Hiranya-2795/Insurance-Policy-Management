@@ -1,0 +1,198 @@
+// src/app/home/insurance-policies/insurance-policies.component.scss
+
+// Define colors directly in this component's SCSS
+$color-primary-navy: #001f3f;         // Navy Blue for icon background and primary button
+$color-dark-navy: #00152b;            // Darker navy for hover states
+$color-white: #ffffff;               // White for text on dark backgrounds, and icon outlines
+$color-light-gray-bg: #f9fafb;       // For sections like How It Works
+$color-dark-gray: #1f2937;           // For titles and strong text
+$color-medium-gray: #4b5563;         // For descriptions and lighter text
+$color-light-blue-highlight: #e0f2fe; // Light blue for "Most Popular" card background
+$color-light-blue-hover: #bfdbfe;     // Even lighter blue for "Most Popular" button hover
+$color-green-status: #22c55e;        // For checkmarks
+
+
+.insurance-policies-section {
+  padding: 4rem 0;
+  background-color: $color-white; // Assuming section background is white
+  text-align: center;
+}
+
+.insurance-policies-container {
+  max-width: 1200px; // Adjusted for consistency, previously 1500px
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: $color-dark-gray;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: $color-medium-gray;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+}
+
+.policies-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem; // Adjusted gap for consistency across grids
+  justify-items: center;
+}
+
+@media (min-width: 640px) {
+  .policies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .policies-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.policy-card {
+  background-color: $color-white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.policy-card.popular {
+  border: 3px solid $color-primary-navy; // Blue border for popular card
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  background-color: $color-light-blue-highlight; // Light blue background for popular card
+}
+
+.popular-tag {
+  position: absolute;
+  top: 1rem;
+  right: -2.5rem;
+  background-color: $color-primary-navy;
+  color: $color-white;
+  padding: 0.25rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+  z-index: 10;
+}
+
+.policy-icon-wrapper {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center; // Center the new icon circle
+  align-items: center; // Center the new icon circle
+  // Remove existing color: var(--color-blue-600); as it's handled by icon-circle-bg and policy-icon
+}
+
+.icon-circle-bg { // NEW CLASS FOR THE CIRCULAR ICON BACKGROUND
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%; // Makes it a perfect circle
+  background-color: $color-primary-navy; // Navy Blue background for the icon circle
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.policy-icon { // This class applies to the SVG itself
+  width: 2.5rem;
+  height: 2.5rem;
+  color: $color-white; // Makes the SVG outline white (assuming fill="none" and stroke="currentColor" in SVG)
+}
+
+.policy-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-dark-gray;
+  margin-bottom: 1rem;
+}
+
+.policy-description-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1;
+}
+
+.policy-description-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: $color-medium-gray;
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.policy-description-item::before {
+  content: '✓';
+  color: #64b5f6;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.policy-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-dark-gray; // Assuming dark gray for price on light background
+  margin-bottom: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn {
+  // Assuming base .btn styles are in styles.scss if needed.
+  // Otherwise, ensure all button styling is defined here.
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 300ms ease;
+  transform: scale(1);
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+.btn-primary {
+  background-color: $color-primary-navy;
+  color: $color-white;
+}
+
+.btn-primary:hover {
+  background-color: $color-dark-navy;
+}
+
+.btn-secondary {
+  background-color: $color-light-blue-highlight;
+  color: $color-primary-navy;
+}
+
+.btn-secondary:hover {
+  background-color: $color-light-blue-hover;
+}

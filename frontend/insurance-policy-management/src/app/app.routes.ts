@@ -12,11 +12,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ExplorePoliciesComponent } from './pages/explore-policies/explore-policies.component';
 import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
 import { CartComponent } from './pages/cart/cart.component';
-
+import { HomePageComponent } from './home/Home.component';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', component: HomePageComponent },
+  
   { path: 'login', component: LoginComponent },
   { path: 'customer-dashboard', component: CustomerDashboardComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },

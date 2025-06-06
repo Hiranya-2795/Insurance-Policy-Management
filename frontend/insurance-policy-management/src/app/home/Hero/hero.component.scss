@@ -1,0 +1,207 @@
+/* hero.component.css */
+
+/* Define CSS Variables for colors */
+:host {
+  --color-blue-600: #001f3f; /* Your primary Navy Blue */
+  --color-white: #ffffff;
+  --color-gray-100: #f3f4f6; /* For button hover (lighter white/off-white) */
+
+  /* New colors based on your provided CSS for the gradient and highlights */
+  --color-dark-blue: #001f3f; /* Direct use of your Navy Blue for the gradient start */
+  --color-indigo-dark: #0a1940; /* A slightly deeper, complementary dark blue/indigo for gradient end */
+  --color-light-blue: #64b5f6; /* A clear, visible light blue for icons and highlighted text */
+  --color-green-400: #4CAF50; /* A standard green for status dots */
+}
+
+.hero-section {
+  position: relative;
+  /* Use your defined dark blue colors for the gradient */
+  background: linear-gradient(to bottom right, var(--color-dark-blue), var(--color-indigo-dark));
+  color: var(--color-white);
+  padding-top: 8rem; /* py-32 */
+  padding-bottom: 8rem; /* py-32 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 1.5rem; /* rounded-b-3xl */
+  border-bottom-right-radius: 1.5rem; /* rounded-b-3xl */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+  overflow: hidden;
+  min-height: 500px; /* Ensure a minimum height for better visual impact */
+}
+
+@media (min-width: 768px) { /* md: */
+  .hero-section {
+    padding-top: 12rem; /* md:py-48 */
+    padding-bottom: 12rem; /* md:py-48 */
+  }
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1; /* Keeps the pattern subtle */
+  /* If you have a specific pattern SVG, ensure it's rendered via innerHTML or background-image */
+}
+
+.hero-pattern-svg {
+  width: 100%;
+  height: 100%;
+  /* Ensure this SVG itself doesn't have hardcoded colors that override opacity */
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 10; /* Ensure content is above background pattern */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+}
+
+.hero-icon-wrapper {
+  margin-bottom: 2rem; /* mb-8 */
+  display: flex;
+  justify-content: center;
+  /* The color property on the wrapper will be inherited by the SVG's currentColor */
+  color: var(--color-light-blue); /* Lighter blue for better visibility */
+}
+
+.hero-icon {
+  width: 6rem; /* Increased size for prominent central icon */
+  height: 6rem; /* Increased size for prominent central icon */
+  /* Ensure your SVG has stroke="currentColor" or fill="currentColor" */
+}
+
+.hero-title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 800; /* font-extrabold */
+  line-height: 1.25; /* leading-tight */
+  margin-bottom: 1.5rem; /* mb-6 */
+  color: var(--color-white); /* Main title text color */
+}
+
+@media (min-width: 768px) { /* md: */
+  .hero-title {
+    font-size: 3.75rem; /* md:text-6xl */
+  }
+  .hero-title-break {
+    display: none; /* hidden md:block */
+  }
+}
+
+.hero-title-highlight {
+  color: var(--color-light-blue); /* Lighter blue for highlighted words */
+}
+
+.hero-description {
+  font-size: 1.125rem; /* text-lg */
+  max-width: 48rem; /* max-w-3xl */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem; /* mb-10 */
+  color: rgba(255, 255, 255, 0.9); /* Slightly less opaque for readability */
+}
+
+@media (min-width: 768px) { /* md: */
+  .hero-description {
+    font-size: 1.25rem; /* md:text-xl */
+  }
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column; /* flex-col */
+  justify-content: center;
+  gap: 1rem; /* space-y-4 */
+}
+
+@media (min-width: 640px) { /* sm: */
+  .hero-buttons {
+    flex-direction: row; /* sm:flex-row */
+    gap: 1.5rem; /* sm:space-x-6 */
+    margin-top: 0; /* sm:space-y-0 */
+  }
+}
+
+.btn-hero-primary {
+  background-color: var(--color-white); /* White background for primary button */
+  color: var(--color-dark-blue); /* Navy Blue text for primary button */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  padding: 0.75rem 2rem; /* py-3 px-8 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  transition: all 300ms ease;
+  text-decoration: none; /* Ensure no underline if it's a link */
+}
+
+.btn-hero-primary:hover {
+  background-color: var(--color-gray-100); /* Lighter gray on hover */
+  transform: scale(1.05); /* Subtle scale effect */
+}
+
+.hero-btn-icon {
+  margin-left: 0.5rem; /* ml-2 */
+  /* Icons within buttons usually inherit color, no specific color here */
+}
+
+.btn-hero-secondary {
+  background-color: transparent;
+  border: 2px solid var(--color-white); /* White border for secondary button */
+  color: var(--color-white); /* White text for secondary button */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  padding: 0.75rem 2rem; /* py-3 px-8 */
+  font-weight: 700;
+  border-radius: 0.5rem;
+  transition: all 300ms ease;
+  text-decoration: none; /* Ensure no underline if it's a link */
+}
+
+.btn-hero-secondary:hover {
+  background-color: var(--color-white); /* White background on hover */
+  color: var(--color-dark-blue); /* Navy Blue text on hover */
+  transform: scale(1.05); /* Subtle scale effect */
+}
+
+.hero-status-indicators {
+  margin-top: 4rem; /* mt-16 */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem; /* space-x-6 */
+  font-size: 0.875rem; /* text-sm */
+  color: rgba(255, 255, 255, 0.8); /* Slightly less opaque for status text */
+}
+
+@media (min-width: 768px) { /* md: */
+  .hero-status-indicators {
+    gap: 3rem; /* md:space-x-12 */
+    font-size: 1rem; /* md:text-base */
+  }
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem; /* mb-2 - for stacked items on mobile */
+}
+
+@media (min-width: 768px) { /* md: */
+  .status-item {
+    margin-bottom: 0; /* md:mb-0 - reset on desktop */
+  }
+}
+
+.status-dot {
+  width: 0.5rem; /* w-2 */
+  height: 0.5rem; /* h-2 */
+  border-radius: 9999px; /* rounded-full */
+  margin-right: 0.5rem; /* mr-2 */
+}
+
+.status-dot-green {
+  background-color: #64b5f6; /* Bright green for the dots */
+}

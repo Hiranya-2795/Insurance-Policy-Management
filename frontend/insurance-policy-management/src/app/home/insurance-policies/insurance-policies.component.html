@@ -1,0 +1,20 @@
+<section id="insurance" class="insurance-policies-section">
+  <div class="insurance-policies-container container">
+    <h2 class="section-title">Our Comprehensive Policies</h2>
+    <p class="section-subtitle">
+      Tailored insurance solutions designed to protect what matters most to you.
+    </p>
+
+    <div class="policies-grid">
+      <div *ngFor="let policy of policies" class="policy-card" [class.popular]="policy.isMostPopular">
+        <div *ngIf="policy.isMostPopular" class="popular-tag">Most Popular</div>
+        <div class="policy-icon-wrapper" [innerHTML]="policy.icon"></div>
+        <h3 class="policy-title">{{ policy.title }}</h3>
+        <ul class="policy-description-list">
+          <li *ngFor="let desc of policy.description" class="policy-description-item">{{ desc }}</li>
+        </ul>
+        <p class="policy-price">{{ policy.price }}</p>
+        </div>
+    </div>
+  </div>
+</section>

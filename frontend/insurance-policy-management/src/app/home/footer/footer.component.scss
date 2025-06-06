@@ -1,0 +1,165 @@
+// src/app/home/footer/footer.component.scss
+
+// Define colors directly in this component's SCSS
+$color-dark-footer-bg: #1f2937;    // Dark background for the footer
+$color-dark-footer-text: #9ca3af; // Lighter gray for general footer text
+$color-white: #ffffff;             // White for highlights, logo, links on hover
+$color-primary-navy: #001f3f;       // Navy blue for buttons, logo accent
+$color-dark-navy: #00152b;          // Darker navy for button hover
+
+.footer-section {
+  background-color: $color-dark-footer-bg; // Dark background
+  color: $color-dark-footer-text;
+  padding: 3rem 1rem; // py-12 px-4
+  border-top-left-radius: 0.75rem; // rounded-t-xl
+  border-top-right-radius: 0.75rem; // rounded-t-xl
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); // subtle shadow upwards
+  line-height: 1.8; // Better readability
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 1fr; // Single column on small screens
+  gap: 2.5rem; // gap-10
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center; // Center content on mobile
+}
+
+@media (min-width: 768px) { // md: breakpoint
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr); // Two columns on medium screens
+    text-align: left;
+  }
+}
+
+@media (min-width: 1024px) { // lg: breakpoint
+  .footer-container {
+    grid-template-columns: repeat(4, 1fr); // Four columns on large screens
+  }
+}
+
+.footer-column {
+  h3 {
+    font-size: 1.25rem; // text-xl
+    font-weight: 700; // font-bold
+    color: $color-white; // White headings
+    margin-bottom: 1.5rem; // mb-6
+  }
+
+  p {
+    font-size: 0.9375rem; // text-sm
+    margin-bottom: 1rem; // mb-4
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0.75rem; // mb-3
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: $color-dark-footer-text; // Link color
+    text-decoration: none;
+    font-size: 0.9375rem; // text-sm
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-white; // White on hover
+    }
+  }
+}
+
+.footer-brand {
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center logo on mobile
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    @media (min-width: 768px) {
+      justify-content: flex-start; // Left align logo on desktop
+    }
+  }
+
+  .footer-logo-icon {
+    color: $color-white; // White logo icon
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .footer-logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $color-white; // White logo text
+  }
+
+  .brand-tagline {
+    font-size: 0.9375rem;
+    color: $color-dark-footer-text;
+    margin-bottom: 1.5rem; // mb-6
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center; // Center social icons on mobile
+    gap: 1rem; // space-x-4
+    @media (min-width: 768px) {
+      justify-content: flex-start; // Left align social icons on desktop
+    }
+  }
+
+  .social-icon {
+    color: $color-dark-footer-text; // Social icon color
+    width: 1.5rem; // w-6 h-6
+    height: 1.5rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: $color-white; // White on hover
+      transform: translateY(-2px);
+    }
+    // Styling for the inner SVG if needed, e.g., to ensure stroke/fill
+    svg {
+        fill: none;
+        stroke: currentColor; // Inherits color from parent 'a' tag
+        stroke-width: 2;
+    }
+  }
+}
+
+.btn-footer-contact {
+  display: inline-block;
+  background-color: $color-primary-navy;
+  color: $color-white;
+  padding: 0.6rem 1.2rem; // py-2.5 px-5
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-top: 1rem; // space from text above
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: $color-dark-navy;
+    transform: translateY(-1px);
+  }
+}
+
+.footer-bottom-bar {
+  text-align: center;
+  padding-top: 2rem; // pt-8
+  margin-top: 2rem; // mt-8
+  border-top: 1px solid rgba(255, 255, 255, 0.1); // Subtle separator
+  font-size: 0.875rem; // text-sm
+  color: rgba(255, 255, 255, 0.6); // Lighter copyright text
+}

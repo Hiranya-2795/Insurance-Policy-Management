@@ -91,7 +91,7 @@
             <tr *ngFor="let policy of paginatedPolicies">
               <td>{{ policy.policyID }}</td>
               <td>{{ policy.policy?.policyType }}</td>
-              <td>${{ policy.policy?.coverageAmount }}</td>
+              <td>${{ policy.policy?.coverageAmount | number:'1.2-2'  }}</td>
               <td>{{ policy.policy?.premiumFrequency }}</td>
               <td>{{ policy.beneficiaryName }}</td>
               <td>

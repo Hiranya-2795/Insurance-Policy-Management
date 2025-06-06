@@ -1,0 +1,21 @@
+<section id= "insights-section" class="success-story-section">
+   
+class="success-story-section">
+  <div class="success-story-container container">
+    <h2 class="section-title">Our Success Story</h2>
+    <p class="section-subtitle">
+      Building trust and providing peace of mind to thousands worldwide.
+    </p>
+
+    <div class="stats-grid">
+      <div *ngFor="let stat of stats" class="stat-card">
+        <div class="stat-icon-wrapper">
+          <div class="icon-circle-bg">
+            <div [innerHTML]="stat.icon"></div> </div>
+        </div>
+        <p class="stat-value">{{ stat.value }}</p>
+        <p class="stat-label">{{ stat.label }}</p>
+      </div>
+    </div>
+  </div>
+</section>
