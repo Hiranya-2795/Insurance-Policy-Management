@@ -2,13 +2,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Needed if this component uses Angular directives
 // Import your section components
-import { HeaderComponent } from 'C:/Users/prash/Documents/Insurance-Policy-Management/frontend/insurance-policy-management/src/app/home/header/header.component';
-import { HeroComponent } from 'C:/Users/prash/Documents/Insurance-Policy-Management/frontend/insurance-policy-management/src/app/home/Hero/hero.component';
-import { WhyChooseUsComponent } from 'C:/Users/prash/Documents/Insurance-Policy-Management/frontend/insurance-policy-management/src/app/home/why-choose-us/why-choose-us.component'; // Assuming you have this
-import { InsurancePoliciesComponent } from 'C:/Users/prash/Documents/Insurance-Policy-Management/frontend/insurance-policy-management/src/app/home/insurance-policies/insurance-policies.component';
-import { SuccessStoryComponent } from 'C:/Users/prash/Documents/Insurance-Policy-Management/frontend/insurance-policy-management/src/app/home/success-story/success-story.component';
+import { HeaderComponent } from './header/header.component';
+import { HeroComponent } from './Hero/hero.component';
+import { WhyChooseUsComponent } from './why-choose-us/why-choose-us.component';
+import { InsurancePoliciesComponent } from './insurance-policies/insurance-policies.component';
+import { SuccessStoryComponent } from './success-story/success-story.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
-import { FooterComponent } from 'C:/Users/prash/Documents/Insurance-Policy-Management/frontend/insurance-policy-management/src/app/home/footer/footer.component'; // Example
+import { FooterComponent } from './footer/footer.component'; // Example
 
 @Component({
   selector: 'app-home-page',
