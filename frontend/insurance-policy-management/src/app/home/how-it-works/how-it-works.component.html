@@ -1,0 +1,25 @@
+<section id="process" class="how-it-works-section">
+  <div class="container text-center">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-description">
+      Getting insurance protection has never been easier. Follow these simple steps to secure your future.
+    </p>
+
+    <div class="steps-grid">
+      <div *ngFor="let step of steps" class="step-card">
+        <div class="step-number">{{ step.stepNumber }}</div>
+        <div class="step-icon-wrapper">
+          <div class="icon-circle-bg">
+            <div [innerHTML]="step.icon"></div> </div>
+          </div>
+        <h3 class="step-title">{{ step.title }}</h3>
+        <p class="step-description">{{ step.description }}</p>
+      </div>
+    </div>
+
+    <a routerLink="/login" class="btn btn-primary btn-cta">
+      Start Your Journey
+    </a>
+     
+  </div>
+</section>

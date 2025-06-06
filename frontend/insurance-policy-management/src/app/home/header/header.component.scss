@@ -1,0 +1,104 @@
+/* header.component.css */
+
+/* Define CSS Variables for colors */
+:host {
+  --color-blue-600: #001f3f; /* Your primary Navy Blue */
+  --color-dark-blue: #00152b; /* Slightly darker Navy Blue for hover states */
+  --color-white: #ffffff;
+  --color-gray-600: #4b5563; /* For navigation links */
+}
+
+.header {
+  background-color: var(--color-white);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* subtle shadow-md */
+  padding-top: 1rem; /* py-4 */
+  padding-bottom: 1rem; /* py-4 */
+  position: fixed; /* Makes the header sticky at the top */
+  width: 100%;
+  z-index: 50; /* Ensures header is above other content */
+  border-bottom-left-radius: 0.5rem; /* rounded-b-lg */
+  border-bottom-right-radius: 0.5rem; /* rounded-b-lg */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Limits the width of the content inside the header */
+  margin-left: auto; /* Centers the container */
+  margin-right: auto; /* Centers the container */
+  padding-left: 1rem; /* px-4 for horizontal spacing */
+  padding-right: 1rem; /* px-4 for horizontal spacing */
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* space-x-2 */
+  text-decoration: none; /* Remove underline for logo link */
+}
+
+.header-logo-icon {
+  color: var(--color-blue-600); /* Navy Blue for the logo icon */
+  width: 2rem; /* Explicit size for the icon */
+  height: 2rem; /* Explicit size for the icon */
+}
+
+.header-logo-text {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  color: var(--color-blue-600); /* Navy Blue for the logo text, matching the icon */
+}
+
+.header-nav {
+  display: none; /* hidden by default */
+  gap: 2rem; /* space-x-8 */
+  flex-grow: 1; /* Allows nav to take available space for justify-content */
+  justify-content: center; /* Centers the nav links */
+}
+
+@media (min-width: 768px) { /* md: */
+  .header-nav {
+    display: flex; /* md:flex */
+  }
+}
+
+.nav-link {
+  color: var(--color-gray-600); /* Default gray for nav links */
+  text-decoration: none; /* Remove underline */
+  font-weight: 500;
+  transition-property: color;
+  transition-duration: 200ms;
+}
+
+.nav-link:hover {
+  color: var(--color-blue-600); /* Navy Blue on hover */
+}
+
+.btn {
+  font-weight: 700; /* font-bold */
+  padding: 0.5rem 1.5rem; /* py-2 px-6 */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition-property: all;
+  transition-duration: 300ms;
+  transform: scale(1);
+  border: none; /* Remove default button border */
+  cursor: pointer;
+  text-decoration: none; /* In case it's a link */
+  display: inline-block; /* For padding and scaling to work */
+  text-align: center;
+}
+
+.btn:hover {
+  transform: scale(1.05); /* hover:scale-105 */
+}
+
+.btn-primary {
+  background-color: var(--color-blue-600); /* Navy Blue for the primary button */
+  color: var(--color-white); /* White text for the primary button */
+}
+
+.btn-primary:hover {
+  background-color: #64b5f6; /* Slightly darker Navy Blue on hover */
+}

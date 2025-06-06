@@ -1,0 +1,94 @@
+// src/app/home/why-choose-us/why-choose-us.component.scss
+
+// Define colors directly in this component's SCSS
+$color-primary-navy: #001f3f;
+$color-dark-navy: #00152b;
+$color-white: #ffffff;
+$color-light-gray-bg: #f9fafb;
+$color-dark-gray: #1f2937;
+$color-medium-gray: #4b5563;
+$color-accent-blue: #64b5f6; // Added for the lighter icon circle background
+
+.why-choose-us-section {
+  padding: 5rem 1rem;
+  background-color: $color-light-gray-bg;
+  border-radius: 0.75rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: $color-dark-gray;
+  margin-bottom: 1.5rem;
+}
+
+.section-description {
+  font-size: 1.125rem;
+  color: $color-medium-gray;
+  max-width: 48rem;
+  margin: 0 auto 3rem auto;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-card {
+  background-color: $color-white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 300ms ease;
+  text-align: left;
+}
+
+.feature-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-0.5rem);
+}
+
+.feature-icon-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-circle-bg {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: $color-accent-blue; // CHANGED to lighter blue
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  color: $color-white;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $color-dark-gray;
+  margin-bottom: 1rem;
+}
+
+.feature-description {
+  color: $color-medium-gray;
+  text-align: left;
+}

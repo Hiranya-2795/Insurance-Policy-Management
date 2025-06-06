@@ -1,0 +1,116 @@
+// src/app/home/success-story/success-story.component.scss
+
+// Define colors directly in this component's SCSS
+$color-primary-navy: #001f3f;       // Navy Blue for icon circle background
+$color-dark-navy: #00152b;          // Darker navy, e.g., for hover states
+$color-accent-blue: #64b5f6;        // Light blue for number values
+$color-white: #ffffff;             // White for icon outline and text
+$color-section-dark-bg: #0a1940;    // Dark blue for the entire section background
+$color-card-dark-bg: #1a264a;       // Slightly lighter dark blue for cards
+$color-dark-gray: #1f2937;          // For titles/text (if on light background)
+$color-medium-gray: #4b5563;        // For descriptions/text (if on light background)
+
+
+.success-story-section {
+  padding: 4rem 0;
+  background-color: $color-section-dark-bg; // Navy Blue background for the entire section
+  text-align: center;
+}
+
+.success-story-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: $color-white; // White text for title
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: $color-white; // White text for subtitle
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  opacity: 0.9;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  justify-items: center;
+}
+
+@media (min-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  background-color: $color-card-dark-bg; // Darker card background
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stat-icon-wrapper {
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-circle-bg {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%; // Makes it circular
+  background-color: $color-accent-blue; // Navy Blue background for the icon circle
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: $color-white; // **THIS IS THE KEY LINE TO MAKE THE ICON WHITE**
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $color-accent-blue; // Light blue for values (500K+, $2.5B, etc.)
+}
+
+.stat-label {
+  font-size: 1.125rem;
+  color: $color-white; // White for labels (Happy Customers, Coverage Provided, etc.)
+  font-weight: 500;
+  opacity: 0.8;
+}

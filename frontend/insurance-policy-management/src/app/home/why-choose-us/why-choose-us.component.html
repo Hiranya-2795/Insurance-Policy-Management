@@ -1,0 +1,20 @@
+<section id="about" class="why-choose-us-section">
+  <div class="container text-center">
+    <h2 class="section-title">Why Choose Our Platform</h2>
+    <p class="section-description">
+      Built for professionals who demand excellence. Our platform combines cutting-edge technology with personalized service to deliver insurance solutions that exceed expectations.
+    </p>
+
+    <div class="feature-grid">
+      <div *ngFor="let feature of whyChooseUsFeatures" class="feature-card">
+        <div class="feature-icon-wrapper">
+          <div class="icon-circle-bg">
+            <div [innerHTML]="feature.icon"></div>
+          </div>
+        </div>
+        <h3 class="feature-title">{{ feature.title }}</h3>
+        <p class="feature-description">{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
