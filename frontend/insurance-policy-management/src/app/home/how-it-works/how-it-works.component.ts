@@ -13,7 +13,8 @@ interface Step {
 @Component({
   selector: 'app-how-it-works',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     RouterModule
   ],
   templateUrl: './how-it-works.component.html',
@@ -27,36 +28,40 @@ export class HowItWorksComponent implements OnInit {
   ngOnInit(): void {
     this.steps = [
       {
-        icon: this.sanitizeSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="step-icon">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+        // Icon for 'Create Account': A user icon with a plus, indicating new user registration.
+        icon: this.sanitizeSvg(`<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="16" x2="22" y1="11" y2="11"/><line x1="19" x2="19" y1="8" y2="14"/>
         </svg>`),
         stepNumber: 1,
         title: 'Create Account',
-        description: 'Sign up for your insurance portal account in just a few minutes with basic information.'
+        description: 'Sign up for your secure insurance portal account in just a few minutes.'
       },
       {
-        icon: this.sanitizeSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="step-icon">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V6.5A2.5 2.5 0 0 0 17.5 4h-11A2.5 2.5 0 0 0 4 6.5v13z"/>
+        // Icon for 'Explore Policies': A notebook with text, signifying reviewing or browsing documents/policies.
+        icon: this.sanitizeSvg(`<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-text">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/><path d="M10 12H7"/><path d="M13 16H7"/>
         </svg>`),
         stepNumber: 2,
-        title: 'Choose Policy',
-        description: 'Browse our comprehensive insurance policies and select the one that best fits your needs.'
+        title: 'Explore Policies',
+        description: 'Browse our comprehensive insurance policies and explore options that best fit your needs.'
       },
       {
-        icon: this.sanitizeSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="step-icon">
-          <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+        // Icon for 'Add Policy': A file icon with a plus, representing adding a new document or policy.
+        icon: this.sanitizeSvg(`<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" x2="12" y1="18" y2="12"/><line x1="9" x2="15" y1="15" y2="15"/>
         </svg>`),
         stepNumber: 3,
-        title: 'Make Payment',
-        description: 'Complete your purchase with secure payment options and flexible premium plans.'
+        title: 'Add Policy',
+        description: 'Easily select, customize, and add your chosen policy to your account.'
       },
       {
-        icon: this.sanitizeSvg(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="step-icon">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>
+        // Icon for 'Get Protected': A checkmark within a circle, symbolizing completion and security.
+        icon: this.sanitizeSvg(`<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>
         </svg>`),
         stepNumber: 4,
         title: 'Get Protected',
-        description: 'Your policy is active immediately. Manage claims and track coverage through your dashboard.'
+        description: 'Your coverage is now active! Manage details and track claims through your personalized dashboard.'
       }
     ];
   }
