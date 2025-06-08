@@ -1,20 +1,21 @@
-# 🚀 Learnings from Insurance Policy Management Website Development
+# 💡 Learnings from Insurance Policy Management Website Development
 
 ---
 
-## 📄 Project Overview
+## 🚀 Project Overview
 
 This project involved building a full-stack **Insurance Policy Management System** that enables both customers and administrators to interact with insurance policy data online. The platform supports management of Life and Non-Life insurance products, offering features such as policy search, customer data updates, and policy creation with appropriate role-based access control.
 
 ---
 
-## 🛠️ Technical Learnings
+## 💻 Technical Learnings
 
 ### 1. Angular Frontend Development
 
 We used **Angular** to create a dynamic and responsive user interface. Key learnings include:
 
-* **Component-based Architecture**: Created reusable and modular components such as:
+* **Component-based Architecture:** Created reusable and modular components such as:
+    * `home`
     * `add-policy`
     * `admin-dashboard`
     * `admin-profile`
@@ -28,27 +29,30 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
     * `Statistics`
     * `view-policy`
     * `Spinner`
-    * `cart`
+    * `Cart`
 
-    ---
+* **`home` Component**
+    * **Role:** Public/User Access
+    * **Purpose:** Acts as the landing page for the Insurance Policy Management System, providing introductory information and navigation options.
+    * **Key Features:**
+        * Displays a welcoming banner and overview of the system’s purpose and benefits.
+        * Includes responsive layout with navigation links to login, register, and other core components.
+        * Serves as the first point of contact for users visiting the platform, offering clean UI and clear call-to-action buttons.
+        * Designed to be accessible to both authenticated and unauthenticated users.
+        * Helps route users to appropriate roles (Admin/User) based on their login credentials.
 
-    #### ➕ `add-policy` Component
-
-    * **Role**: Admin
-    * **Purpose**: Allows administrators to add a new insurance policy into the system.
-    * **Key Features**:
+* **`add-policy` Component**
+    * **Role:** Admin
+    * **Purpose:** Allows administrators to add a new insurance policy into the system.
+    * **Key Features:**
         * Displays a form for policy details: ID, type, start & end dates, term, coverage amount, premium, and payment frequency.
         * Validates form inputs with both frontend checks (e.g., required fields, numeric limits) and user-friendly error messages.
         * On successful submission, it sends the data to the backend using `PolicyService.addPolicy()` and redirects to the admin dashboard.
-        * Includes a feedback system (success/error alerts) and a back button to return to the dashboard.
 
-    ---
-
-    #### 📊 `admin-dashboard` Component
-
-    * **Role**: Admin
-    * **Purpose**: Acts as the homepage for admin users, providing quick access to policies and administrative actions.
-    * **Key Features**:
+* **`admin-dashboard` Component**
+    * **Role:** Admin
+    * **Purpose:** Acts as the homepage for admin users, providing quick access to policies and administrative actions.
+    * **Key Features:**
         * Displays a search bar to filter policies by Policy ID, Type, or Premium Frequency.
         * Fetches all policies using `PolicyService.getPolicies()` on component initialization.
         * Displays policy data in a table including term, coverage, and payment frequency.
@@ -56,17 +60,15 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
             * Viewing full policy details.
             * Editing a policy (navigates to `edit-policy`).
             * Adding a new policy (navigates to `add-policy`).
-        * Shows loading indicators and error messages as needed.
+            * Registering another admin.
+            * Statistics.
 
-    ---
-
-    #### 👤 `customer-dashboard` Component
-
-    * **Role**: Customer
-    * **Purpose**: Serves as the main dashboard for customers to manage and explore their policies.
-    * **Key Features**:
+* **`customer-dashboard` Component**
+    * **Role:** Customer
+    * **Purpose:** Serves as the main dashboard for customers to manage and explore their policies.
+    * **Key Features:**
         * Fetches the list of policies owned by the logged-in customer using `UserService.getPoliciesByUserId()`.
-        * Allows real-time search by policy ID, type, premium frequency, or beneficiary name.
+        * Allows real-time search by policy ID, type, premium frequency.
         * Displays a policy table showing:
             * Policy ID
             * Type
@@ -74,32 +76,21 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
             * Payment frequency
             * Beneficiary name
         * Each policy has a **View** button linking to `view-policy`.
-        * Includes a button to **Edit Profile** and a **Logout** button for session termination.
+        * Includes a button to **Edit Profile**, **Explore Policies** and a **Logout** button for session termination.
 
-    ---
-
-    #### ✏️ `edit-policy` Component
-
-    * **Role**: Customer
-    * **Purpose**: Allows a customer to update their personal details associated with a specific policy (not the policy terms).
-    * **Key Features**:
-        * Retrieves policy details using the `PolicyID` from the route.
-        * Allows updating only user-related fields such as:
-            * Phone number
-            * Email
-            * Address (if applicable)
-        * Uses `UserService` or `PolicyService` to fetch and update data.
+* **`edit-policy` Component**
+    * **Role:** Admin
+    * **Purpose:** Allows admin to update details associated with a specific policy.
+    * **Key Features:**
+        * Retrieves policy details using the PolicyID from the route.
+        * Uses `PolicyService` to fetch and update data.
         * Provides success/error feedback after the update.
         * Includes navigation controls to go back to the dashboard or logout.
-    * **Note**: It ensures that customers cannot alter core policy attributes like term, coverage, or frequency.
 
-    ---
-
-    #### ✏️ `edit-profile` Component
-
-    * **Role**: Customer or Admin
-    * **Purpose**: Lets the logged-in user (admin or customer) update their own profile information.
-    * **Key Features**:
+* **`edit-profile` Component**
+    * **Role:** Customer
+    * **Purpose:** Lets the logged-in user (admin or customer) update their own profile information.
+    * **Key Features:**
         * Fetches the current user's profile details via a service like `UserService.getCurrentUser()`.
         * Editable fields might include:
             * Full name
@@ -107,37 +98,34 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
             * Email
             * Date of birth
             * Gender
+            * Aadhar number
+            * Password
         * Prevents editing of secure fields like password, role, or Aadhar number.
         * Uses `ngModel` for two-way binding and Angular forms for validation.
         * On submission, sends an update request to the backend.
         * Displays success/error messages.
-    * **Security**: Only the currently logged-in user can update their own profile. No impersonation is allowed.
+        * **Security:** Only the currently logged-in user can update their own profile. No impersonation is allowed.
 
-    ---
-
-    #### 🔑 `login` Component
-
-    * **Role**: All users
-    * **Purpose**: Authenticates users and provides access to their respective dashboards.
-    * **Key Features**:
+* **`login` Component**
+    * **Role:** All users and Admin
+    * **Purpose:** Authenticates users, admins and provides access to their respective dashboards.
+    * **Key Features:**
         * Displays a form to input:
             * Email
             * Password
-        * Validates credentials on the client-side.
+            * Role
+        * Validates credentials on the client and admin-side.
         * Sends credentials to the backend using an authentication service (`AuthService`).
         * On successful login:
             * Stores JWT token in local storage/session.
-            * Redirects users to either the `admin-dashboard` or `customer-dashboard` based on their role.
+            * Redirects to either the `admin-dashboard` or `customer-dashboard` based on their role.
         * Displays error messages for invalid login attempts.
-    * **Security**: The JWT token is used for all subsequent authorized requests to the backend API.
+        * **Security:** The JWT token is used for all subsequent authorized requests to the backend API.
 
-    ---
-
-    #### 📝 `register` Component
-
-    * **Role**: Public (Unregistered users)
-    * **Purpose**: Allows new users (customers or admins) to create an account.
-    * **Key Features**:
+* **`register` Component**
+    * **Role:** Public (Unregistered users)
+    * **Purpose:** Allows new users to create an account.
+    * **Key Features:**
         * Presents a form to collect personal and login information:
             * Full Name, Date of Birth, Gender
             * Phone Number, Email, Aadhar Number
@@ -152,24 +140,16 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
             * Displays success or error messages
             * Redirects to the login page upon successful registration
 
-    ---
+* **`search-policy` Component**
+    * **Role:** Customer and Admin
+    * **Purpose:** Intended to provide search functionality for filtering policies based on different criteria.
+    * **Key Features:**
+        * Search based on Policy Id, Policy Type, Premium Frequency
 
-    #### 🔍 `search-policy` Component
-
-    * **Role**: Customer
-    * **Purpose**: Intended to provide search functionality for filtering policies based on different criteria.
-    * **Current Status**:
-        * Only a placeholder exists (`search-policy works!`) in the template.
-        * Component file is empty, suggesting that implementation is pending or to be done later.
-    * You might want to enhance this with a search bar, filters, and a policy result table in the future.
-
-    ---
-
-    #### 📈 `statistics` Component
-
-    * **Role**: Admin
-    * **Purpose**: Displays graphical and numerical insights about the policy system.
-    * **Key Features**:
+* **`statistics` Component**
+    * **Role:** Admin
+    * **Purpose:** Displays graphical and numerical insights about the policy system.
+    * **Key Features:**
         * Fetches statistics from `/api/AdminStatistics`:
             * Total registered customers (excluding admins)
             * Total policies in the system
@@ -180,62 +160,39 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
             * A bar chart for policy types
             * A bar chart for premium frequencies
         * Provides navigation buttons (Back, Logout)
-        * Responsive and styled chart containers with tooltips and labeled axes
 
-    ---
-
-    #### 👁️ `view-policy` Component
-
-    * **Role**: Customer or Admin
-    * **Purpose**: Allows a user to view complete details of a specific policy.
-    * **Key Features**:
+* **`view-policy` Component**
+    * **Role:** Customer and Admin
+    * **Purpose:** Allows a user to view complete details of a specific policy.
+    * **Key Features:**
         * Retrieves a policy by its ID (from the route) using `PolicyService.getPolicyById()`
         * Displays details in two sections:
             * Policy Information: ID, type, start/end date, term
             * Coverage Info: coverage amount, premium, frequency
-        * Includes:
-            * Loading state and fallback UI
-            * Back navigation (returns to admin or customer dashboard based on role)
-            * Logout button
-    * **Note**: This is a read-only component for viewing policy details — editing is not allowed here.
+        * **Note:** This is a read-only component for viewing policy details — editing is not allowed here.
 
-    ---
+* **`Spinner` Component**
+    * **Role:** Shared UI Component
+    * **Purpose:** The Spinner component is a reusable UI element designed to display a loading animation while asynchronous operations (such as API calls) are in progress. It enhances the user experience by visually indicating that the system is processing or fetching data.
 
-    #### 🔄 `Spinner` Component
-
-    * **Role**: Shared UI Component
-    * **Component Name**: `spinner`
-    * **Location**: `spinner.component.ts`, `spinner.component.html`, `spinner.component.scss`
-    * **Purpose**: The Spinner component is a reusable UI element designed to display a loading animation while asynchronous operations (such as API calls) are in progress. It enhances the user experience by visually indicating that the system is processing or fetching data.
-
-    ---
-
-    #### 🛒 `cart` Component
-
-    * **Role**: User
-    * **Purpose**: Allows users to review policies added to their cart, remove unwanted items, and finalize policy purchase by assigning a beneficiary.
-    * **Key Features**:
+* **`cart` Component**
+    * **Role:** User
+    * **Purpose:** Allows users to review policies added to their cart, remove unwanted items, and finalize policy purchase by assigning a beneficiary.
+    * **Key Features:**
         * Displays a table of selected policies in the user's cart with key details: Policy ID, Type, Coverage Amount, and Premium Frequency.
         * Provides **Remove** button to delete policies from the cart using `CartService.removeFromCart()`.
-        * Includes an "Add Policy" button for each policy, which opens a modal for entering the beneficiary name.
-        * Uses a modal overlay to securely collect beneficiary name input before finalizing a policy.
+        * Includes an "**Add Policy**" button for each policy, which opens a modal for entering the beneficiary name.
+        * Uses a **modal overlay** to securely collect beneficiary name input before finalizing a policy.
         * On submission, sends data to the backend via `UserPolicyService.addUserPolicy()` and updates the cart accordingly.
-        * Provides user feedback using `ngx-toastr` for success, error, or info messages.
+        * Provides user feedback using **ngx-toastr** for success, error, or info messages.
         * Displays a dynamic message and navigation option if the cart is empty.
         * Includes a **Back** button to return to the Explore Policies page.
         * All interactions (add/remove) are disabled while in progress to avoid duplicate actions.
-        * Responsive and user-friendly UI with loading states and form validations.
 
----
-
-* **Service Integration**:
-    * Developed dedicated Angular services for authentication (`AuthService`) and data operations (`PolicyService`, `CustomerService`), enabling smooth communication with the backend API.
-* **Routing and Navigation**:
-    * Implemented Angular Routing and route guards to restrict access to certain routes based on user roles.
-* **Form Handling**:
-    * Used Reactive Forms to handle input validation and two-way binding.
-* **Charts Integration**:
-    * Visualized policy sales data using bar/line charts with libraries like `ngx-charts` or **Chart.js**.
+* **Service Integration:** Developed dedicated Angular services for authentication (`AuthService`) and data operations (`PolicyService`, `CustomerService`), enabling smooth communication with the backend API.
+* **Routing and Navigation:** Implemented Angular Routing and route guards to restrict access to certain routes based on user roles.
+* **Form Handling:** Used Reactive Forms to handle input validation and two-way binding.
+* **Charts Integration:** Visualized policy sales data using bar/line charts with libraries like `ngx-charts` or `Chart.js`.
 
 ---
 
@@ -243,29 +200,16 @@ We used **Angular** to create a dynamic and responsive user interface. Key learn
 
 We developed the backend using **ASP.NET Core Web API**. Learnings include:
 
-* **RESTful API Design**:
-    * Built REST endpoints for managing policies and customer records using controller-action pattern. Included the following Controllers:
-        * `AdminStatisticsController.cs`
-        * `AuthController.cs`
-        * `BeneficiaryController.cs`
-        * `ClaimController.cs`
-        * `ClaimHistoryController.cs`
-        * `ClaimHistoryEntryController.cs`
-        * `PaymentHistoryController.cs`
-        * `PaymentHistoryEntryController.cs`
-        * `PolicyController.cs`
-        * `StatisticsController.cs`
-        * `UserController.cs`
-        * `UserPolicyController.cs`
-        * `UserProfileController.cs`
+* **RESTful API Design:** Built REST endpoints for managing policies and customer records using controller-action pattern. Included the following Controllers:
+    * `AdminStatisticsController.cs`
+    * `AuthController.cs`
+    * `PolicyController.cs`
+    * `UserPolicyController.cs`
+    * `UserProfileController.cs`
 
-    ---
-
-    #### 📊 `AdminStatistics` Controller
-
-    * **Role**: Admin
-    * **Purpose**: Provides aggregated statistical data for the admin dashboard.
-    * **Key Features**:
+* **`AdminStatistics` Controller**
+    * **Purpose:** Provides aggregated statistical data for admin dashboard.
+    * **Key Features:**
         * Fetches:
             * Total number of users (excluding admins)
             * Total policies in the system
@@ -275,174 +219,46 @@ We developed the backend using **ASP.NET Core Web API**. Learnings include:
             * Distribution of premium frequencies
         * Returns all metrics in a structured response for admin analysis.
 
-    ---
-
-    #### 🔑 `Auth` Controller
-
-    * **Role**: All users
-    * **Purpose**: Handles user registration and login functionality.
-    * **Key Features**:
-        * `POST /register`:
+* **`Auth` Controller**
+    * **Purpose:** Handles user registration and login functionality.
+    * **Key Features:**
+        * **POST `/register`:**
             * Registers users or admins
             * Validates role (User/Admin), uniqueness of email
-        * `POST /login`:
+        * **POST `/login`:**
             * Validates credentials
             * Issues JWT token with role-based claims
             * Returns token for client-side session management
 
-    ---
+* **`Policy` Controller**
+    * **Purpose:** Manages all available insurance policies in the system.
+    * **Key Features:**
+        * **GET `/`:** Lists all policies
+        * **GET `/{id}`:** Fetches a specific policy
+        * **POST `/`:** Creates a new policy
+        * **PUT `/{id}`:** Updates a policy
+        * **DELETE `/{id}`:** Deletes a policy
 
-    #### 🤝 `Beneficiary` Controller
-
-    * **Role**: Authenticated users
-    * **Purpose**: Manages beneficiary information linked to user policies.
-    * **Key Features**:
-        * `GET /`: Returns list of all beneficiaries with linked policy
-        * `GET /{id}`: Retrieves specific beneficiary by ID
-        * `POST /`: Adds a new beneficiary
-        * `PUT /{id}`: Updates existing beneficiary details
-        * `DELETE /{id}`: Removes a beneficiary
-
-    ---
-
-    #### 📝 `Claim` Controller
-
-    * **Role**: Authenticated users
-    * **Purpose**: Manages insurance claims submitted by users.
-    * **Key Features**:
-        * `GET /`: Lists all claims
-        * `GET /{id}`: Fetches a claim by ID
-        * `POST /`: Submits a new claim
-        * `PUT /{id}`: Updates a claim
-        * `DELETE /{id}`: Deletes a claim
-        * Returns proper success or error messages for each action
-
-    ---
-
-    #### 📜 `ClaimHistory` Controller
-
-    * **Role**: Admin and authenticated users
-    * **Purpose**: Tracks the history of changes made to claims.
-    * **Key Features**:
-        * `GET /`: Lists all claim history entries
-        * `GET /{id}`: Fetches a specific history entry
-        * `POST /`: Adds a new claim history entry
-        * `PUT /{id}`: Updates a claim history entry
-        * `DELETE /{id}`: Deletes a specific history record
-
-    ---
-
-    #### 📜 `ClaimHistoryEntry` Controller
-
-    * **Role**: Admin and authenticated users
-    * **Purpose**: Manages detailed entries of claim history over time.
-    * **Key Features**:
-        * `GET /`: Lists all claim history entries
-        * `GET /{id}`: Fetches a specific entry
-        * `POST /`: Creates a new claim history entry
-        * `PUT /{id}`: Updates an entry
-        * `DELETE /{id}`: Deletes an entry
-
-    ---
-
-    #### 💳 `PaymentHistory` Controller
-
-    * **Role**: Authenticated users
-    * **Purpose**: Tracks all payment records associated with insurance policies.
-    * **Key Features**:
-        * `GET /`: Lists all payment histories with related policy info
-        * `GET /{id}`: Retrieves payment by ID
-        * `POST /`: Creates a new payment record
-        * `PUT /{id}`: Updates existing payment record
-        * `DELETE /{id}`: Deletes a payment record
-
-    ---
-
-    #### 💳 `PaymentHistoryEntry` Controller
-
-    * **Role**: Admin and authenticated users
-    * **Purpose**: Handles specific entries within the payment history system.
-    * **Key Features**:
-        * `GET /`: Lists all payment entries
-        * `GET /{id}`: Retrieves a payment entry
-        * `POST /`: Adds a new payment entry
-        * `PUT /{id}`: Updates payment entry
-        * `DELETE /{id}`: Deletes entry by ID
-
-    ---
-
-    #### 🛡️ `Policy` Controller
-
-    * **Role**: Admin
-    * **Purpose**: Manages all available insurance policies in the system.
-    * **Key Features**:
-        * `GET /`: Lists all policies
-        * `GET /{id}`: Fetches a specific policy
-        * `POST /`: Creates a new policy
-        * `PUT /{id}`: Updates a policy
-        * `DELETE /{id}`: Deletes a policy
-
-    ---
-
-    #### 📈 `Statistics` Controller
-
-    * **Role**: Admin
-    * **Purpose**: Provides summary statistics for system overview.
-    * **Key Features**:
-        * `GET /`: Returns stats including:
-            * Total customers
-            * Total policies
-            * Active policies
-            * Total claims
-            * Active and pending claims
-
-    ---
-
-    #### 👤 `User` Controller
-
-    * **Role**: All users
-    * **Purpose**: Manages user registration, login, and user-related operations.
-    * **Key Features**:
-        * Handles user registration by receiving user details (like name, email, password, etc.).
-        * Validates incoming registration data.
-        * Calls user service layer methods for business logic and database interaction.
-        * Supports user login and JWT token generation.
-        * Provides endpoints for retrieving user data and updating user profiles.
-        * Sends appropriate HTTP responses and error messages for failed operations.
-
-    ---
-
-    #### 🛡️ `UserPolicy` Controller
-
-    * **Role**: Customers
-    * **Purpose**: Manages policy-related actions for users, such as viewing and managing their insurance policies.
-    * **Key Features**:
+* **`UserPolicyController`**
+    * **Purpose:** Manages policy-related actions for users, such as viewing and managing their insurance policies.
+    * **Key Features:**
         * Provides endpoints to view all policies assigned to a user.
         * Allows users to add or remove policies.
         * Validates policy data before processing.
         * Calls service layer for policy-related business logic.
         * Sends structured HTTP responses for success and failure scenarios.
 
-    ---
-
-    #### 👨‍💻 `UserProfile` Controller
-
-    * **Role**: All users
-    * **Purpose**: Manages user profile information, including viewing and editing profile details.
-    * **Key Features**:
+* **`UserProfileController`**
+    * **Purpose:** Manages user profile information, including viewing and editing profile details.
+    * **Key Features:**
         * Offers endpoints to retrieve the user’s profile information.
         * Allows users to update personal details (like address, phone, etc.).
         * Handles client-side and server-side validation for profile data.
         * Interacts with the user service to perform CRUD operations.
         * Provides clear HTTP responses for profile update success or error states.
 
----
-
-* **Entity Framework Core**:
-    * Used **EF Core** for database access and object-relational mapping.
-    * Leveraged **LINQ** for querying and data filtering.
-* **Repository Pattern**:
-    * Implemented a clean architecture with service and repository layers to separate concerns and improve maintainability.
+* **Entity Framework Core:** Used EF Core for database access and object-relational mapping. Leveraged LINQ for querying and data filtering.
+* **Repository Pattern:** Implemented a clean architecture with service and repository layers to separate concerns and improve maintainability.
 
 ---
 
@@ -450,12 +266,8 @@ We developed the backend using **ASP.NET Core Web API**. Learnings include:
 
 Security was a crucial part of the application. Key learnings:
 
-* **JWT Authentication**:
-    * Implemented token-based authentication using **JSON Web Tokens (JWT)**.
-    * Secured backend endpoints and ensured only authenticated users could access them.
-* **Role-Based Access Control (RBAC)**:
-    * Distinguished between "**Admin**" and "**Customer**" roles.
-    * Restricted access to policy creation functionality to Admin users only.
+* **JWT Authentication:** Implemented token-based authentication using **JSON Web Tokens (JWT)**. Secured backend endpoints and ensured only authenticated users could access them.
+* **Role-Based Access Control (RBAC):** Distinguished between "Admin" and "Customer" roles. Restricted access to policy creation functionality to Admin users only.
 
 ---
 
@@ -463,38 +275,37 @@ Security was a crucial part of the application. Key learnings:
 
 We designed a well-structured, normalized relational database in **SQL Server** to store and manage user profiles, policies, and their relationships efficiently. The schema supports integrity, scalability, and optimized access to data.
 
-* **Tables Created**:
-    * `UserProfile`: Stores user details such as name, contact information, Aadhar number, login credentials, and user roles (e.g., Admin or Customer).
-    * `Policy`: Stores insurance policy details including type, term, coverage, premium details, and applicable constraints.
-    * `UserPolicy`: Represents the many-to-many relationship between users and policies, including optional beneficiary information.
+* **Tables Created:**
+    * **`UserProfile`:** Stores user details such as name, contact information, Aadhar number, login credentials, and user roles (e.g., Admin or Customer).
+    * **`Policy`:** Stores insurance policy details including type, term, coverage, premium details, and applicable constraints.
+    * **`UserPolicy`:** Represents the many-to-many relationship between users and policies, including optional beneficiary information.
 
-* **Constraints Used**:
-    * **Primary Keys**:
+* **Constraints Used:**
+    * **Primary Keys:**
         * `UserID` in `UserProfile`
         * `PolicyID` in `Policy`
         * Composite key of `UserID` and `PolicyID` in `UserPolicy`
-    * **Foreign Keys**:
+    * **Foreign Keys:**
         * `UserPolicy.UserID` → `UserProfile.UserID`
         * `UserPolicy.PolicyID` → `Policy.PolicyID`
-    * **Unique Constraints in UserProfile**:
+    * **Unique Constraints in `UserProfile`:**
         * `Email` (`UQ_UserProfile_Email`)
         * `Phone Number` (`UQ_UserProfile_Phone`)
         * `Aadhar Number` (`UQ_UserProfile_Aadhar`)
-    * **Check Constraints in Policy**:
+    * **Check Constraints in `Policy`:**
         * `PremiumFrequency` must be one of 'Annually', 'Quarterly', or 'Monthly'.
         * `PolicyTerm` must be between 1 and 70.
         * `PolicyType` must be one of 'home', 'car', 'health', 'life', 'travel', 'business', 'device', 'bike'.
-    * These constraints ensure data validity and prevent duplication while enforcing business rules.
+    These constraints ensure data validity and prevent duplication while enforcing business rules.
 
-* **Search Optimization**:
-    * The database was designed to support efficient policy search and filtering, including:
-        * Searching by Policy ID, Policy Type, or Premium Frequency
-        * Optimized use of indexes via primary keys and foreign keys to speed up joins and lookups
-        * Structured to support further analytical queries like aggregating policy sales by month, type, or user
+* **Search Optimization:** The database was designed to support efficient policy search and filtering, including:
+    * Searching by Policy ID, Policy Type, or Premium Frequency
+    * Optimized use of indexes via primary keys and foreign keys to speed up joins and lookups
+    * Structured to support further analytical queries like aggregating policy sales by month, type, or user
 
 ---
 
-## ⚠️ Challenges
+## 🛑 Challenges
 
 * JWT integration with Angular
 * Handling unauthorized access to components
@@ -507,14 +318,14 @@ We designed a well-structured, normalized relational database in **SQL Server** 
 ## ✅ Resolutions
 
 * Created an `AuthService` to manage tokens and appended tokens in HTTP request headers.
-* Used Angular **route guards** and backend **role checks** to restrict unauthorized access.
-* Used **RxJS observables** and Angular's `ngOnInit` lifecycle hook for data reloading.
-* Followed **normalization rules** and used **foreign keys** for relational integrity.
-* Applied **Angular Material** and **responsive design principles** for smooth UX.
+* Used Angular route guards and backend role checks to restrict unauthorized access.
+* Used RxJS observables and Angular's `ngOnInit` lifecycle hook for data reloading.
+* Followed normalization rules and used foreign keys for relational integrity.
+* Applied Angular Material and responsive design principles for smooth UX.
 
 ---
 
-## ➿ Version Control with Git & GitHub
+## 🤝 Version Control with Git & GitHub
 
 To manage source code effectively, we used **Git** for version control and **GitHub** for collaboration. This enabled our team to track changes, collaborate efficiently, and maintain a clean project history.
 
@@ -523,10 +334,13 @@ To manage source code effectively, we used **Git** for version control and **Git
     ```bash
     # Stage all changes for commit
     git add .
+
     # Commit changes with a meaningful message
-    git commit -m "cart change"
+    git commit -m " "
+
     # Push commits to the remote GitHub repository
     git push
+
     # Clone the repository to local system
     git clone [https://github.com/Hiranya-2795/Insurance-Policy-Management.git](https://github.com/Hiranya-2795/Insurance-Policy-Management.git)
     ```
@@ -534,7 +348,7 @@ To manage source code effectively, we used **Git** for version control and **Git
 * **Key Learnings from Git Usage**
     * Understood the **commit-push workflow** and how it integrates with remote repositories.
     * Learned to manage code changes using `git add`, `commit`, and `push`.
-    * Experienced using **branches** for feature development and resolving **merge conflicts**.
-    * Used GitHub for **issue tracking**, **collaboration**, and **code review**.
+    * Experienced using branches for feature development and resolving merge conflicts.
+    * Used GitHub for issue tracking, collaboration, and code review.
 
 This helped ensure smooth team coordination, traceability of features, and easy rollback when required.
