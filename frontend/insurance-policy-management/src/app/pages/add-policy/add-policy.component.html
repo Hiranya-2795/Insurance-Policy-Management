@@ -1,7 +1,10 @@
 <div class="dashboard-wrapper">
   <nav class="navbar">
     <div class="container">
-      <a class="navbar-brand" routerLink="/">FortiSure</a>
+      <a class="navbar-brand d-flex flex-column align-items-start" routerLink="/" style="line-height: 1;">
+        <span style="font-size: 1.5rem; color: white;">FortiSure</span>
+        <span style="font-size: 0.85rem; color: white;">Insurance Policy Management System</span>
+      </a>
       <div class="nav-links d-flex">
         <button class="logout-btn me-2" (click)="goBack()">Back</button>
         <button class="logout-btn" routerLink="/">Logout</button>
