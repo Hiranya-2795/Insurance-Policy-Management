@@ -343,6 +343,7 @@ To manage source code effectively, we used **Git** for version control and **Git
 
     # Clone the repository to local system
     git clone [https://github.com/Hiranya-2795/Insurance-Policy-Management.git](https://github.com/Hiranya-2795/Insurance-Policy-Management.git)
+    git clone -b Hiranya --single-branch https://github.com/Hiranya-2795/Insurance-Policy-Management.git 
     ```
 
 * **Key Learnings from Git Usage**
