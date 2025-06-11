@@ -1,6 +1,6 @@
 # Project Name
 
-This repository contains code related to the Y execution video.
+This repository contains code related to the  execution video.
 
 ## Accessing the Video
 
