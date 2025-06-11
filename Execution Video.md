@@ -1,4 +1,4 @@
-# Project Name
+# FortiSure Insurance Policy Management System
 
 This repository contains code related to the  execution video.
 
